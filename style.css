@@ -1,0 +1,162 @@
+@import url('https://fonts.googleapis.com/css2?family=Squada+One&display=swap');
+
+*{
+    margin: 0px;
+    padding: 0px; 
+    box-sizing: border-box;
+    user-select: none;
+   
+}
+body{
+    position: relative;
+    
+}
+#mama{
+    position: absolute;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(1px);
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#mama h1{
+    font-size: 250px;
+    text-align: center;
+    font-family: 'Squada One', cursive;
+    color: rgba(137, 43, 226, 0.616);
+    
+}
+.time{
+    background: linear-gradient(90deg , blueviolet,violet);
+    height: 5px;
+    position: absolute;
+    width: 100%;
+    transition: 1s;
+
+}
+
+
+.papi {
+    z-index: 1;
+    background:  whitesmoke;
+    padding: 10px;
+    height: 100vh;
+    margin-top: 0;
+}
+.hijito{
+    background: white;
+    height: 78vh;
+    margin: 10vh;
+    border: 7px dotted blueviolet;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0;
+
+} 
+
+.hijito h1 {
+
+background: blueviolet;
+
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+animation: aparecer  1s;
+font-family: 'Squada One', cursive;;
+font-size: 75px;
+
+color: tomato;
+
+}
+
+#resp{
+    position: absolute;
+    bottom: 150px;
+    color: white;
+    height: 100px;
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-resp{
+    margin: 10px;
+    padding: 10px;
+    color: black;
+    cursor:pointer;
+    border-radius: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    background: linear-gradient(violet,violet);
+    color: white ;
+    font-weight: bold;
+    box-shadow: 3px 3px 2px rgba(0, 0, 0,.2);
+    transition: .4s;
+    font-family: roboto;
+    animation: aparecerbtn 1s;
+    
+
+}
+
+.btn-resp:hover{
+    color:violet;
+    background: white;
+    transform: scale(1.1);
+    box-shadow: 4px 4px 5px rgba(0, 0, 0,.2);
+}
+
+.puntos{
+    display: flex;
+    flex-direction: row;
+    margin: 20px;
+    justify-content: end;
+    width: 90%;
+    align-items: flex-end;
+}
+.puntos h1{
+    margin-left: 20px;
+    font-family: roboto;
+
+}
+.correct{
+    border: 4px solid green;
+    padding: 0 15px 0 15px;
+    border-radius: 10px;
+}
+.nocorre{
+    border: 4px solid red;
+    padding: 0 15px 0 15px;
+    border-radius: 10px;
+}
+
+@keyframes aparecer {
+    from {
+        position: relative;
+        opacity: 0;
+        top: -100px;
+    }
+    to {
+        position: relative;
+        opacity: 1;
+        top: 0;
+    }
+}
+
+@keyframes aparecerbtn {
+    from {
+        position: relative;
+        opacity: 0;
+        bottom:  -100px;
+    }
+    to {
+        position: relative;
+        opacity: 1;
+        bottom:  0;
+    }
+}
