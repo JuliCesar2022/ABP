@@ -1,38 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap');
+
 *{
-    box-sizing: border-box;
-    padding: 0px;
-    margin: 0px;
-}
-body{
-    background: white;
-}
-.menu{
-    
- flex: 2;
-}
-.secion2{
-    flex: 1;
-    display: flex;
-    margin-right: 10px;
+    user-select: none;
+    margin: 0;
+    font-family: 'Ubuntu', sans-serif;
+
 }
 .padre{
-    display: flex;
-
     background: whitesmoke;
-    justify-content: end;
-    align-items: center;
-    height: 70px;
-    margin-top: 5px;
-    flex: 1;
+    height: 70vh;       
+    background-image: url("photo-of-pretty-ethnic-woman-ponders-on-how-to-answer-question-thinks-deeply-about-something-uses-modern-mobile-phone-tries-to-made-up-good-message-keeps-index-finger-near-lips-stands-indoor.jpg");
+    background-size:  100% 205%;
+    background-position: 50px  ;
+   background-position-x: -2px;
+}
+.menu{
+    display: flex;
+   background: rgba(255, 255, 255, .5);
+   padding : 15px 15px 15px 0;
+   font-family: roboto;
+   backdrop-filter: blur(5px);
+   justify-content: center;
+   align-items: center;
+   text-align: center;
+   color: white;
+  transition: 0.5s;
+  text-shadow: 10px 10px 10px rgba(0, 0, 0, .1  );
+
+}
+
+.menu h2:hover {
+    color: black;
+    text-shadow: 10px 10px 10px rgba(0, 0, 0, .1  );
+    transform: scale(1.1);
+    transition: 0.5s;
+}
+.obje{
+    flex: 1 ;
 }
 .crear{
-    border: 2px inset violet;
-    margin-left: 5px;
-    padding: 0px;
-    border-radius: 10px;
-    height: 40px;
+    flex: 1 ;
+}
+
+.divider{
+    width: 100%;
+    height: 2px;
+    background-color: rgba(0, 0, 0, 1 );
+}
+
+h1{
+
+    /* margin: 20px; */
+}
+
+p{
+    /* margin: 20px; */
+}
+.titulo{
+    height: 50%;
+    width: 84%;
+    font-size: 40px;
     display: flex;
-    justify-content: center;
     align-items: center;
-    flex: 1;
+    justify-content: flex-end;
+    color:white;;
 }
