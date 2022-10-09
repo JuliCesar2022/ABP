@@ -1,0 +1,38 @@
+*{
+    box-sizing: border-box;
+    padding: 0px;
+    margin: 0px;
+}
+body{
+    background: white;
+}
+.menu{
+    
+ flex: 2;
+}
+.secion2{
+    flex: 1;
+    display: flex;
+    margin-right: 10px;
+}
+.padre{
+    display: flex;
+
+    background: whitesmoke;
+    justify-content: end;
+    align-items: center;
+    height: 70px;
+    margin-top: 5px;
+    flex: 1;
+}
+.crear{
+    border: 2px inset violet;
+    margin-left: 5px;
+    padding: 0px;
+    border-radius: 10px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}
