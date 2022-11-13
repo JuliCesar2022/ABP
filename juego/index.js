@@ -63,7 +63,7 @@
             correct= 0;
             incorrec=0;
             puntofinal=0;
-            time = 10
+            time = 25
             currentQuestion=0;
             currentTime = time
             
@@ -157,11 +157,13 @@ document.getElementsByClassName("nocorre")[0].innerHTML= puntosbueno+1
 
 
 
+var snd = new Audio("./sonds/egg.mp3");
 async function empezar(){
     console.log("empezaron los sergios a bobear")
     console.log(preguntas.length)
     for(i=0 ; i<=preguntas.length-1; i++){
-
+        
+        snd.play();
         currentQuestion = i
         console.log(i)
 
@@ -190,9 +192,15 @@ async function empezar(){
 
         papi.appendChild(div)
 
+            width = screen.width;
+
             for(currentTime=time;currentTime>= 0;currentTime--){
 
-                document.getElementsByClassName("time")[0].style=`width:${currentTime}0%; `
+
+                width = width - ( screen.width/time )
+
+
+                document.getElementsByClassName("time")[0].style=`width: ${ width }px; `
                 console.log(await esperar1s())
             }
 

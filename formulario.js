@@ -18,6 +18,12 @@ CurrentCuestion = {
     correct: null,
     vale: null
 }
+
+if(jsonData.preguntas.length==0){
+    document.getElementById("interna").innerHTML+='<div class="sinitems"><h1>NO HAY ITEMS</h1></div>'
+}
+
+
 contar=0
 function agg(){
 
@@ -160,6 +166,9 @@ function score(){
 
                     jsonData.preguntas.push({...CurrentCuestion})   
 
+                    if(jsonData.preguntas.length>0){
+                        document.getElementsByClassName("sinitems")[0].style="z-index:0;opacity:0; "
+                    }
                     console.log(jsonData.preguntas)
                     document.getElementById("Preguntasagregadas"+contemos).innerHTML+=`
             
@@ -189,6 +198,8 @@ function score(){
                 }
                 contemos++
 
+                reseteartodoesto()
+
             }
         } 
      }
@@ -196,11 +207,44 @@ function score(){
      console.log(jsonData)
 
 
+
     }
 
        
 }
 
+
+function reseteartodoesto(){
+    
+    document.getElementById("questions").value=""
+    CurrentCuestion.question = ""
+    CurrentCuestion.vale= null
+    document.getElementById("scoree").value=""
+   
+    contar=0
+    limitar=0
+    for( i = 0; i< CurrentCuestion.responses.length;i++ ){
+        
+        document.getElementById("resp"+i).innerHTML=`<p id="respuestaaparecer${i}"></p>`
+        document.getElementById("resp"+i).style=`margin: 10px;padding:0; background: rgba(0, 0, 0, 0.0);display: flex;
+        justify-content: center;
+        align-items: center;border-radius:20px;height:45px;opacity: 0;
+        animation: fade-in 1s forwards;"`
+          document.getElementById("respuestaaparecer"+i).style=`opacity: 0;
+        animation: fade-in 3s forwards;`
+
+
+       
+        
+        
+    }
+    CurrentCuestion.responses=[]
+
+   
+    
+    
+
+}
     
     function flechita(id){
        
@@ -235,6 +279,7 @@ function score(){
 
 
             function crearsala() {
+                
 if(jsonData.preguntas.length>0){
 
     var requestOptions = {
@@ -250,7 +295,7 @@ if(jsonData.preguntas.length>0){
                console.log(location.href)
                Swal.fire({
                 html:` <div class="link">
-                <div class="link1"> <a id="copiartexto" href="${location.href.replaceAll("#tab1","").replaceAll("#tab2","")}juego/?id=${linkidsala}">${location.href.replaceAll("#tab1","").replaceAll("#tab2","")}juego/?id=${linkidsala}</a> </div>
+                <div class="link1"> <a id="copiartexto" href="${location.href.replaceAll("#tab1","").replaceAll("#tab2","").replaceAll("#contact","")}juego/?id=${linkidsala}">${location.href.replaceAll("#tab1","").replaceAll("#tab2","").replaceAll("#contact","")}juego/?id=${linkidsala}</a> </div>
                 <div class="copy" onclick="copiar()"><ion-icon name="copy-outline"></ion-icon></div>
             </div>`,
             style:`margin:0;padding:0;`,
