@@ -293,7 +293,7 @@ if(jsonData.preguntas.length>0){
                     .then(response => response.text())
                     .then(result => {
                         decode= JSON.parse(result)
-                        linkidsala= decode.data
+                        linkidsala= decode.data.idSala
                         // preguntasdata=decode.data.preguntas
                         
 
