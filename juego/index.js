@@ -13,7 +13,7 @@
             formato=JSON.parse(result)
             formato=formato.data
             if(formato==null){
-                location.href ="http://127.0.0.1:5501/pagina_principa/psps.html#tab2";
+                location.href ="./..";
             }
         })
 

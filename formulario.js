@@ -293,12 +293,12 @@ if(jsonData.preguntas.length>0){
                     .then(response => response.text())
                     .then(result => {
                         decode= JSON.parse(result)
-                        linkidsala= decode.data.idSala
+                        linkidsala= decode.data
                         // preguntasdata=decode.data.preguntas
                         
-
+                        console.log(linkidsala)
                         if(linkidsala!=null ){
-                            location.href =`${location.href.replaceAll("#tab1","").replaceAll("#tab2","")}/juego/?id=${linkidsala}`;
+                             location.href =`${location.href.replaceAll("#tab1","").replaceAll("#tab2","")}juego/?id=${idsala}`;
                         }else {
                             Swal.fire({
                                 icon: 'error',
