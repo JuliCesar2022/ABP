@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="formulario.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   
+
+        <div class="cuadros agregar">
+            <div class="pregunta">
+
+            </div>
+
+            <div class="interna" id="interna">
+                <div class="Preguntasagregadas" id="Preguntasagregadas0">
+                </div>
+                <div class="Preguntasagregadas" id="Preguntasagregadas1">
+                </div>
+                <div class="Preguntasagregadas" id="Preguntasagregadas2">
+                </div>
+                <div class="Preguntasagregadas" id="Preguntasagregadas3">
+                </div>
+                <div class="Preguntasagregadas" id="Preguntasagregadas4">
+                </div>
+                <div class="Preguntasagregadas" id="Preguntasagregadas5">
+                </div>
+                <div class="Preguntasagregadas" id="Preguntasagregadas6">
+                </div>
+                <div class="Preguntasagregadas" id="Preguntasagregadas7">
+                </div>
+                <div class="Preguntasagregadas" id="Preguntasagregadas8">
+                </div> 
+                <div class="Preguntasagregadas" id="Preguntasagregadas9">
+                </div> 
+                <div class="Preguntasagregadas" id="Preguntasagregadas10">
+                </div> 
+                <div class="Preguntasagregadas" id="Preguntasagregadas11">
+                </div> 
+                <div class="Preguntasagregadas" id="Preguntasagregadas12">
+                </div> 
+                <div class="Preguntasagregadas" id="Preguntasagregadas13">
+                </div> 
+                <div class="Preguntasagregadas" id="Preguntasagregadas14">
+                </div> 
+                <div class="Preguntasagregadas" id="Preguntasagregadas15">
+                </div>
+                <div class="Preguntasagregadas" id="Preguntasagregadas16">
+                </div>
+                <div class="Preguntasagregadas" id="Preguntasagregadas17">
+                </div>
+                <div class="Preguntasagregadas" id="Preguntasagregadas18">
+                </div>
+                <div class="Preguntasagregadas" id="Preguntasagregadas19">
+                </div>
+                <div class="Preguntasagregadas" id="Preguntasagregadas20">
+                </div>
+                <div class="Preguntasagregadas" id="Preguntasagregadas21">
+                </div>
+                <div class="Preguntasagregadas" id="Preguntasagregadas22">
+                </div>
+                <div class="Preguntasagregadas" id="Preguntasagregadas23">
+                </div>
+                <div class="Preguntasagregadas" id="Preguntasagregadas24">
+                </div>
+                <div class="Preguntasagregadas" id="Preguntasagregadas25">
+                </div>
+                <div class="Preguntasagregadas" id="Preguntasagregadas26">
+                </div>
+                <div class="Preguntasagregadas" id="Preguntasagregadas27">
+                </div>
+                <div class="Preguntasagregadas" id="Preguntasagregadas28">
+                </div>
+                <div class="Preguntasagregadas" id="Preguntasagregadas29">
+                </div>
+                <div class="Preguntasagregadas" id="Preguntasagregadas30">
+                </div>
+                <div class="Preguntasagregadas" id="Preguntasagregadas31">
+                </div>
+                <div class="Preguntasagregadas" id="Preguntasagregadas32">
+                </div>
+                <div class="Preguntasagregadas" id="Preguntasagregadas33">
+                </div>
+                <div class="Preguntasagregadas" id="Preguntasagregadas34">
+                </div>
+                <div class="Preguntasagregadas" id="Preguntasagregadas35">
+                </div>
+                <div class="Preguntasagregadas" id="Preguntasagregadas36">
+                </div>
+                <div class="Preguntasagregadas" id="Preguntasagregadas37">
+                </div>
+                <div class="Preguntasagregadas" id="Preguntasagregadas38">
+                </div>
+                <div class="Preguntasagregadas" id="Preguntasagregadas39">
+                </div>
+            </div>
+            <div class="CrearSala">
+
+                <input type="button" value="Crear sala" onclick="crearsala()">
+                
+            </div>
+
+
+        </div>
+        <div class="cuadros plantilla">
+            <div class="preguntaScore">
+                <div class="pre">
+                    <input id="questions" onchange="actualizar()" type="text" placeholder="Ingrese aqui una pregunta">
+                </div>
+                <div   class="score">
+                    <input id="scoree" onchange="score()" type="number"placeholder="Score">
+                </div>
+            </div>
+
+
+            <div class="respuesta">
+                
+                <div class="resp">
+                    <input type="text" id="respuestass" placeholder="ingrese las posibles respuestas" >
+                    <input type="button" value="Agregar respuesta"  onclick="agg()">
+                </div>
+                <div class="resp margin" id="resp">
+                        <div id="resp0"></div>
+                        <div id="resp1"></div>
+                        <div id="resp2"></div>
+                        <div id="resp3"></div>
+                </div>
+
+            </div>
+            <div class="CrearSalaa">
+                <select  onchange="myFunction()" name="lenguajes" id="lang">
+                    <option value="escoja">-Escoja la respuesta correcta-</option>
+                  </select>
+            </div>
+            <div class="aggLimp">
+                <div class="agg margi">
+                    <input type="button" value="agregar" onclick="BotonAgregar()">
+
+
+
+                </div>
+                <div class="agg">
+                    <input type="button" value="Limpiar">
+
+                </div>
+            </div>
+
+        </div>
+        
+        </div>
+        <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+        <script src="formulario.js"></script>
+</body>
+</html> 
