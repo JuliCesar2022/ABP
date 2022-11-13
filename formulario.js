@@ -247,12 +247,10 @@ if(jsonData.preguntas.length>0){
         .then(result => {
                decode= JSON.parse(result)
                linkidsala= decode.data.idSala
-               const HOST = `${window.location.protocol}//${window.location.host}`;
-               console.log(HOST)
                console.log(location.href)
                Swal.fire({
                 html:` <div class="link">
-                <div class="link1"> <a id="copiartexto" href="${HOST}/ABP/juego/?id=${linkidsala}">${HOST}/ABP/juego/?id=${linkidsala}</a> </div>
+                <div class="link1"> <a id="copiartexto" href="${location.href}/juego/?id=${linkidsala}">${location.href}/juego/?id=${linkidsala}</a> </div>
                 <div class="copy" onclick="copiar()"><ion-icon name="copy-outline"></ion-icon></div>
             </div>`,
             style:`margin:0;padding:0;`,
