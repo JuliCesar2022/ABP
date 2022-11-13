@@ -249,6 +249,7 @@ if(jsonData.preguntas.length>0){
                linkidsala= decode.data.idSala
                const HOST = `${window.location.protocol}//${window.location.host}`;
                console.log(HOST)
+               console.log(location.href)
                Swal.fire({
                 html:` <div class="link">
                 <div class="link1"> <a id="copiartexto" href="${HOST}/ABP/juego/?id=${linkidsala}">${HOST}/ABP/juego/?id=${linkidsala}</a> </div>
