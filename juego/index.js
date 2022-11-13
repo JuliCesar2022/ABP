@@ -41,7 +41,7 @@
         /* Read more about isConfirmed, isDenied below */
         
         if (result.isConfirmed) {
-           
+           NombreJugador=result.value
           if(result.value.length>3){
             Validar=true
             console.log("funciona")
