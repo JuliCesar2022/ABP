@@ -250,7 +250,7 @@ if(jsonData.preguntas.length>0){
                console.log(location.href)
                Swal.fire({
                 html:` <div class="link">
-                <div class="link1"> <a id="copiartexto" href="${location.href}juego/?id=${linkidsala}">${location.href}juego/?id=${linkidsala}</a> </div>
+                <div class="link1"> <a id="copiartexto" href="${location.href.replaceAll("#tab1","").replaceAll("#tab2","")}juego/?id=${linkidsala}">${location.href.replaceAll("#tab1","").replaceAll("#tab2","")}juego/?id=${linkidsala}</a> </div>
                 <div class="copy" onclick="copiar()"><ion-icon name="copy-outline"></ion-icon></div>
             </div>`,
             style:`margin:0;padding:0;`,
@@ -298,7 +298,7 @@ if(jsonData.preguntas.length>0){
                         
 
                         if(linkidsala!=null ){
-                            location.href =`./juego/?id=${linkidsala}`;
+                            location.href =`${location.href.replaceAll("#tab1","").replaceAll("#tab2","")}/juego/?id=${linkidsala}`;
                         }else {
                             Swal.fire({
                                 icon: 'error',
