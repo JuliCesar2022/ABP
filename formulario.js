@@ -298,7 +298,7 @@ if(jsonData.preguntas.length>0){
                         
 
                         if(linkidsala!=null ){
-                            location.href =`${location.href}/juego/?id=${linkidsala}`;
+                            location.href =`./juego/?id=${linkidsala}`;
                         }else {
                             Swal.fire({
                                 icon: 'error',
