@@ -250,7 +250,7 @@ if(jsonData.preguntas.length>0){
                console.log(location.href)
                Swal.fire({
                 html:` <div class="link">
-                <div class="link1"> <a id="copiartexto" href="${location.href}/juego/?id=${linkidsala}">${location.href}/juego/?id=${linkidsala}</a> </div>
+                <div class="link1"> <a id="copiartexto" href="${location.href}juego/?id=${linkidsala}">${location.href}juego/?id=${linkidsala}</a> </div>
                 <div class="copy" onclick="copiar()"><ion-icon name="copy-outline"></ion-icon></div>
             </div>`,
             style:`margin:0;padding:0;`,
