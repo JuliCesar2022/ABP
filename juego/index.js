@@ -17,7 +17,7 @@
             }
         })
 
-
+        
 
     Swal.fire({
         allowOutsideClick: false,
@@ -142,7 +142,7 @@
     if( preguntas[currentQuestion].responses[a] == preguntas[currentQuestion].responses[ preguntas[currentQuestion].correct ] ){
         console.log("RESPUETAS CORRECTA!!!!!!!")
         puntosbueno = document.getElementsByClassName("correct")[0].innerHTML = (parseInt(document.getElementsByClassName("correct")[0].innerHTML) || 0 )+ parseInt( preguntas[currentQuestion].vale )
-
+     
         
     }else{
         console.log("Brutooo!")
@@ -157,13 +157,12 @@ document.getElementsByClassName("nocorre")[0].innerHTML= puntosbueno+1
 
 
 
-var snd = new Audio("./sonds/egg.mp3");
+
 async function empezar(){
     console.log("empezaron los sergios a bobear")
     console.log(preguntas.length)
     for(i=0 ; i<=preguntas.length-1; i++){
         
-        snd.play();
         currentQuestion = i
         console.log(i)
 
@@ -188,6 +187,7 @@ async function empezar(){
 
         }
 
+        
         papi = document.getElementsByClassName("hijito")[0]
 
         papi.appendChild(div)
