@@ -287,7 +287,7 @@ if(jsonData.preguntas.length>0){
         redirect: 'follow'
       };
       
-       fetch("https://servidor-abp-mate.herokuapp.com/CrearSala?preguntas="+JSON.stringify(jsonData), requestOptions)
+       fetch("https://preguntame.onrender.com//CrearSala?preguntas="+JSON.stringify(jsonData), requestOptions)
         .then(response => response.text())
         .then(result => {
                decode= JSON.parse(result)
@@ -334,7 +334,7 @@ if(jsonData.preguntas.length>0){
               var idsala= document.getElementById("idsala").value
                 if(idsala.length>0){
                   
-                    fetch("https://servidor-abp-mate.herokuapp.com/GetSalaById?id="+idsala, requestOptions)
+                    fetch("https://preguntame.onrender.com/GetSalaById?id="+idsala, requestOptions)
                     .then(response => response.text())
                     .then(result => {
                         decode= JSON.parse(result)
