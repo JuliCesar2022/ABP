@@ -7,7 +7,7 @@
         redirect: 'follow'
       };
       
-      fetch("https://servidor-abp-mate.herokuapp.com/GetSalaById?id="+getParameterByName("id"), requestOptions)
+      fetch("https://preguntame.onrender.com/GetSalaById?id="+getParameterByName("id"), requestOptions)
         .then(response => response.text())
         .then(result => { 
             formato=JSON.parse(result)
@@ -50,7 +50,7 @@
                 redirect: 'follow'
               };
               
-              fetch("https://servidor-abp-mate.herokuapp.com/GetSalaById?id="+getParameterByName("id"), requestOptions)
+              fetch("https://preguntame.onrender.com/GetSalaById?id="+getParameterByName("id"), requestOptions)
                 .then(response => response.text())
                 .then(result => { 
                     formato=JSON.parse(result)

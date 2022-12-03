@@ -287,7 +287,7 @@ if(jsonData.preguntas.length>0){
         redirect: 'follow'
       };
       
-       fetch("https://preguntame.onrender.com//CrearSala?preguntas="+JSON.stringify(jsonData), requestOptions)
+       fetch("https://preguntame.onrender.com/CrearSala?preguntas="+JSON.stringify(jsonData), requestOptions)
         .then(response => response.text())
         .then(result => {
                decode= JSON.parse(result)
