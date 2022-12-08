@@ -1,0 +1,194 @@
+*{
+    box-sizing: border-box;
+}
+.ecerrardoscuadros{
+    background: aqua;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.cuadros{
+    background: red;
+    padding: 10px;
+    margin: 10px;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+}
+
+.pregunta{
+    width: 100%;
+    background: white;
+    outline: invert 1px;
+    outline-color: rgba(0, 255, 255, 0.497);
+    border: 1px solid  black;
+    border-radius: 2px;
+    
+}
+.contenedordeTimeyScore{
+   
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    
+}
+
+.scoretime{
+    margin-right: 10px;
+    margin-left: 10px;
+    outline: invert 1px;
+    outline-color: rgba(0, 255, 255, 0.497);
+    border: 1px solid  black;
+    border-radius: 5px;
+    width: 50%;
+}
+
+.contieneelbotoncrear{
+    width: 100%;
+    background: blue;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+.escribirposiblerespuesta{
+    margin-top: 10px;
+    border-radius: 5px 5px 0 0;
+    outline: invert 1px;
+    outline-color: rgba(0, 255, 255, 0.497);
+    border: 1px solid  black;
+    border-radius: 5px 5px 0 0;
+}
+.btnagregarrespuesta{
+    width: 90%;
+}
+.containbtnrepuestagregar{
+    display: flex;
+    justify-content: center;
+    margin-top: 2px;
+}
+.aquiseagreganposiblesrespuestas{
+    background: white;
+    height: 250px;
+    margin-top: 10px;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+}
+
+
+.alinear{
+    display: flex;
+    margin-top: 10px;
+    
+    
+}
+.edit{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0 20px 20px 0;
+    width: 50px;
+    padding-bottom: 5px;
+    background: rgba(0, 0, 0, 0.208);
+    margin: 0;
+}
+
+.edit ion-icon{
+    height: 100%;
+    width: 50%;
+    pointer-events: none;
+    
+       
+}
+.edit:active{
+    transform: scale(.9);
+    transition: .7s;
+}
+
+.respuesta{
+    
+    background: rgba(0, 0, 0, 0.149);
+    border-radius: 20px 0 0 20px;
+    width: 300px;
+    overflow-X: scroll;
+    scroll-behavior: smooth;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.respuesta::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+
+.respuesta::-webkit-scrollbar:vertical {
+    width:10px;
+}
+
+.respuesta::-webkit-scrollbar-button:increment,.respuesta::-webkit-scrollbar-button {
+    display: none;
+} 
+
+.respuesta::-webkit-scrollbar:horizontal {
+    height: 5px;
+}
+
+.respuesta::-webkit-scrollbar-thumb {
+    background-color: #7979793f;
+    border-radius: 20px;
+    border: 2px solid #f1f2f300;
+}
+
+.respuesta::-webkit-scrollbar-track {
+    border-radius: 10px;  
+    margin-left: 10px;
+}
+
+.aquiseagreganposiblesrespuestas::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+
+.aquiseagreganposiblesrespuestas::-webkit-scrollbar:vertical {
+    width:10px;
+}
+
+.aquiseagreganposiblesrespuestas::-webkit-scrollbar-button:increment,.aquiseagreganposiblesrespuestas::-webkit-scrollbar-button {
+    display: none;
+} 
+
+.aquiseagreganposiblesrespuestas::-webkit-scrollbar:horizontal {
+    height: 5px;
+}
+
+.aquiseagreganposiblesrespuestas::-webkit-scrollbar-thumb {
+    background-color: #7979793f;
+    border-radius: 20px;
+    border: 2px solid #f1f2f300;
+}
+
+.aquiseagreganposiblesrespuestas::-webkit-scrollbar-track {
+    border-radius: 10px;  
+    margin-left: 10px;
+}
+
+@keyframes fade-in {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  @keyframes fade-in-Item {
+    
+    0% {
+         opacity: 0;
+        transform: translateY(40px);
+    }
+    100% { opacity: 1; transform: translateY(0);}
+  }
+
+.textarestylo{
+    border-radius: 10px 10px 0 10px;
+    height: 80%;
+    width: 80%;
+    background: transparent;
+    font-size: 1em;
+}

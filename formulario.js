@@ -281,18 +281,19 @@ function reseteartodoesto(){
             function crearsala() {
                 
 if(jsonData.preguntas.length>0){
+console.log("se hace")
 
     var requestOptions = {
         method: 'GET',
         redirect: 'follow'
       };
+      console.log(location.href)
       
        fetch("https://preguntame.onrender.com/CrearSala?preguntas="+JSON.stringify(jsonData), requestOptions)
         .then(response => response.text())
         .then(result => {
                decode= JSON.parse(result)
                linkidsala= decode.data.idSala
-               console.log(location.href)
                Swal.fire({
                 html:` <div class="link">
                 <div class="link1"> <a id="copiartexto" href="${location.href.replaceAll("#tab1","").replaceAll("#tab2","").replaceAll("#contact","")}juego/?id=${linkidsala}">${location.href.replaceAll("#tab1","").replaceAll("#tab2","").replaceAll("#contact","")}juego/?id=${linkidsala}</a> </div>

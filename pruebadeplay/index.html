@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Play</title>
+    <link rel="stylesheet" href="play.css">
+</head>
+<body>
+    
+    <div class="ecerrardoscuadros">
+
+    <!-- cuadro donde se crea la sala -->
+        <div class="cuadros">
+            cuadro donde se crea la sala
+            <!-- nombre de la Sala -->
+            <input type="text" id="namesala">
+            <!-- aqui se agregan las preguntas con todos sus datos  -->
+            <div id="cuadrodondeseagreganlaspreguntas">
+                <!-- aqui va no hay item con js -->
+            </div>
+
+            <!-- este es un contenedor de crear Sala -->
+            <div class="contieneelbotoncrear">
+
+                <input type="button" value="Crear Sala">
+            </div>
+
+        </div>
+
+    <!-- cuadro donde se crean las preguntas -->
+        <div class="cuadros">
+            cuadro donde se crean las preguntas
+            <!-- ingreso de la pregunta -->
+            <input type="text" class="pregunta" onchange="guardarpregunta()" id="pregunta">
+
+            <!-- este es un contenedor donde esta el score y el tiempo  -->
+            <div class="contenedordeTimeyScore">
+                <input type="text" id="score" onchange="guardarscore()" class="scoretime" placeholder="Score">
+                <input type="timepicker" id="time" class="scoretime"  placeholder="Time">
+
+            </div>
+            <!-- input donde se escribe la posible respuesta -->
+            <input type="text" id="escribirposiblerespuesta" class="escribirposiblerespuesta">
+            <!-- este es el boton de agregar respuesta -->
+            <div class="containbtnrepuestagregar">
+                <input type="button" onclick="agg()" id="btnagregarrespuesta" class="btnagregarrespuesta" value="añadir respuesta">     
+            </div>
+            <!-- aqui se agregaran las posibles respuestas -->
+            <div  class="aquiseagreganposiblesrespuestas" id="aquiseagreganposiblesrespuestas">
+                <!-- aqui se añadiran los elementos -->
+               
+
+            </div>
+        </div>
+        
+
+    </div>
+
+   
+    
+    
+    <script src="jsdeprueba.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</body>
+</html>
