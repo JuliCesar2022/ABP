@@ -12,12 +12,15 @@ jsonData = {
 
 }
 
+
 CurrentCuestion = {
     question: "",
     responses: [],
     correct: null,
     vale: null
 }
+
+
 
 if(jsonData.preguntas.length==0){
     document.getElementById("interna").innerHTML+='<div class="sinitems"><h1>NO HAY ITEMS</h1></div>'

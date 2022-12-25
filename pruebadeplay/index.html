@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,17 +8,23 @@
     <title>Play</title>
     <link rel="stylesheet" href="play.css">
 </head>
+
 <body>
     
+
     <div class="ecerrardoscuadros">
 
-    <!-- cuadro donde se crea la sala -->
-        <div class="cuadros">
-            cuadro donde se crea la sala
+        <!-- cuadro donde se crea la sala -->
+        <div class="cuadros cuadrocenter">
+
+            <div class="ajustesdelasala">
+
+                <ion-icon name="settings-outline"></ion-icon>
+            </div>
             <!-- nombre de la Sala -->
-            <input type="text" id="namesala">
+            <input type="text" id="namesala" placeholder="nombre de la sala" onchange="guardarnamesala()">
             <!-- aqui se agregan las preguntas con todos sus datos  -->
-            <div id="cuadrodondeseagreganlaspreguntas">
+            <div id="cuadrodondeseagreganlaspreguntas" class="cuadrodondeseagreganlaspreguntas">
                 <!-- aqui va no hay item con js -->
             </div>
 
@@ -29,41 +36,86 @@
 
         </div>
 
-    <!-- cuadro donde se crean las preguntas -->
+        <!-- cuadro donde se crean las preguntas -->
+        
         <div class="cuadros">
-            cuadro donde se crean las preguntas
             <!-- ingreso de la pregunta -->
-            <input type="text" class="pregunta" onchange="guardarpregunta()" id="pregunta">
+
+            <input type="text" class="pregunta" placeholder="ingrese una pregunta" onchange="guardarpregunta()" id="pregunta">
 
             <!-- este es un contenedor donde esta el score y el tiempo  -->
-            <div class="contenedordeTimeyScore">
-                <input type="text" id="score" onchange="guardarscore()" class="scoretime" placeholder="Score">
-                <input type="timepicker" id="time" class="scoretime"  placeholder="Time">
+            <div class="contenedordeTimeyScore" id="contenedordeTimeyScore">
+                <input type="text" id="score" onkeyup="this.value=Numeros(this.value)" autocomplete="off" onkeydown="this.value=Numeros(this.value)" onkeypress="this.value=Numeros(this.value)" maxlength="4" onchange="guardarscore()" class="scoretime"  placeholder="Score" required>
+                
+
+                <div class="scoretime" id="timer" title="Tiempo">
+                  
+                    <input type="text" maxLength="2" onchange="subiralalist(id)" autocomplete="off" onkeyup="this.value=Numeros(this.value)" id="min"
+                        onfocus="ponerenfoque()" onblur="quitarenfoque()" placeholder="min" pattern="[0-9]*">
+                    <label onclick="autofocu()" for="">:</label>
+                    <input type="text" class="segundos" onchange="subiralalist(id)"  autocomplete="off" onkeyup="this.value=Numeros(this.value)" id="ss"
+                        onfocus="ponerenfoque()" onblur="quitarenfoque()" maxLength="2" placeholder="ss"
+                        pattern="[0-9]*">
+                    <div class="relog" onclick="autofocu()">
+                        
+                        <div id="temporizador" class="contenedordelrelog" onclick="selecionartime()">
+                            <ion-icon name="timer-outline"></ion-icon>
+                            </ion-icon></div>
+                    </div>
+                </div>
+
 
             </div>
+            <div id="selecion"></div>
             <!-- input donde se escribe la posible respuesta -->
-            <input type="text" id="escribirposiblerespuesta" class="escribirposiblerespuesta">
+            <div class="contienetextareaparaescribirresp">   
+            <textarea name="" id="escribirposiblerespuesta" class="escribirposiblerespuesta" cols="23" placeholder="Escriba aqui una posible respuesta" rows="10"></textarea>
+        </div>
+            <!-- <input type="text" id="escribirposiblerespuesta" class="escribirposiblerespuesta"> -->
             <!-- este es el boton de agregar respuesta -->
             <div class="containbtnrepuestagregar">
-                <input type="button" onclick="agg()" id="btnagregarrespuesta" class="btnagregarrespuesta" value="añadir respuesta">     
+                <input type="button" onclick="agg()" id="btnagregarrespuesta" class="btnagregarrespuesta"
+                    value="añadir respuesta">
             </div>
             <!-- aqui se agregaran las posibles respuestas -->
-            <div  class="aquiseagreganposiblesrespuestas" id="aquiseagreganposiblesrespuestas">
+            <div class="aquiseagreganposiblesrespuestas" id="aquiseagreganposiblesrespuestas">
                 <!-- aqui se añadiran los elementos -->
-               
+
 
             </div>
+
+
+            <div class="selecderespuesta" id="selecderespuesta">
+                <select name="" onchange="respuestasparaseleccionar()" class="styloselecpadre" id="respuestasparaseleccionar">
+                    <option value="1">--Escoja la respuesta correcta--</option>
+                </select>
+            </div>
+<div class="contienelosbotones">
+    <input type="button" onclick="ledioclickalbotonagregar()" value="Agregar">
+    <input type="button" value="Limpiar"> 
+
+</div>
+            
+
+
+          
         </div>
-        
+
 
     </div>
 
-   
+
+
+
     
-    
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="jsdeprueba.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
 </body>
+
 </html>

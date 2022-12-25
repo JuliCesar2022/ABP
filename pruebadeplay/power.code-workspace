@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "../../proyectos/power"
+		},
+		{
+			"path": ".."
+		},
+		{
+			"path": "../../ServidorAbpMate"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "ABP"
+	}
+}
