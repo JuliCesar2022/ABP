@@ -7,7 +7,9 @@ jsonData = {
 
     tablaScore: [
 
-    ]
+    ],
+
+    Tema:null
 
 }
 
@@ -27,14 +29,14 @@ respuestascodigo = [];
 function guardarpregunta() {
     containinputdelapregunta = document.getElementById("pregunta").value
     CurrentCuestion.question = containinputdelapregunta
-   
+
 }
 // aqui se agregara el score
 
 function guardarscore() {
     var score = document.getElementById("score").value
     CurrentCuestion.score = score
-    
+
 }
 
 // aqui agregaremos las posibles respuestas al CurrentCuestion y visualmente 
@@ -46,13 +48,14 @@ justify-content: center ;align-items: center;`
 var activador = true
 Maxrespuestas = true
 contar = 0;
+
 function agg() {
 
 
     posiblerespuesta = document.getElementById("escribirposiblerespuesta").value
     validarquenoestevacio = posiblerespuesta.replaceAll(" ", "")
     document.getElementById("escribirposiblerespuesta").value = ""
-    //    validacion de mas de un dijito en el input para añadir respuesta
+        //    validacion de mas de un dijito en el input para añadir respuesta
     if (validarquenoestevacio.length > 0) {
         contar++;
 
@@ -71,7 +74,7 @@ function agg() {
             }
             // agregar respuesta al CurrentCuestion
             CurrentCuestion.responses.push(posiblerespuesta)
-            
+
             respuestascodigo = []
             i = 0
             CurrentCuestion.responses.forEach(element => {
@@ -107,7 +110,7 @@ function agg() {
 
 
     }
-    var countt=0
+    var countt = 0
     CurrentCuestion.correct = null
     document.getElementById('respuestasparaseleccionar').innerHTML = `<option value="1">--Escoja la respuesta correcta--</option>`
 
@@ -163,7 +166,7 @@ function guardarcorreccion(numero, lista, id) {
 
     document.getElementById("textarea" + numero).innerHTML = `<p  id="editarrespuesta${numero}">${CurrentCuestion.responses[lista]}</p>`
     document.getElementById('respuestasparaseleccionar').innerHTML = `<option value="1">Escoja la respuesta correcta</option>`
-     var count=0
+    var count = 0
     CurrentCuestion.responses.forEach(element => {
         document.getElementById('respuestasparaseleccionar').innerHTML += `<option value="${count} ">${element}  </option>`
         count++
@@ -172,29 +175,30 @@ function guardarcorreccion(numero, lista, id) {
 
 function ponerenfoque() {
     document.getElementById("timer").style = "border:2px solid black;"
-  
+
 }
 
 function quitarenfoque() {
     document.getElementById("timer").style = "border:1px solid black;"
-   
+
 }
 
-function Numeros(string) {//Solo numeros
+function Numeros(string) { //Solo numeros
     var out = '';
-    var filtro = '1234567890';//Caracteres validos
+    var filtro = '1234567890'; //Caracteres validos
 
     //Recorrer el texto y verificar si el caracter se encuentra en la lista de validos 
     for (var i = 0; i < string.length; i++)
         if (filtro.indexOf(string.charAt(i)) != -1)
-            //Se añaden a la salida los caracteres validos
+        //Se añaden a la salida los caracteres validos
             out += string.charAt(i);
 
-    //Retornar valor filtrado
+        //Retornar valor filtrado
     return out;
 }
+
 function autofocu() {
-    
+
     document.getElementById("ss").focus()
 }
 
@@ -239,7 +243,7 @@ function selecionartime() {
 
     document.getElementById("select2").innerHTML = ``
     document.getElementById("select3").innerHTML = ``
- 
+
     for (let i = 0; i < 60; i++) {
         document.getElementById("select2").innerHTML += `<option  class="styloiption" value="${i}">${i}</option> `
         if (document.getElementById("min").value.length > 0) {
@@ -256,17 +260,18 @@ function selecionartime() {
 
     if (document.getElementById('selecion')) {
 
-        window.addEventListener('click', function (e) {
+        document.querySelector("body").addEventListener('click', function borrarfuncion(e) {
             /*2. Si el div con id clickbox contiene a e. target*/
             agarrarloqueundio = document.getElementById('ventanadelinput')
             agarrarrelog = document.getElementById('temporizador')
             if (agarrarloqueundio.contains(e.target) || agarrarrelog.contains(e.target)) {
 
-
+                console.log(agarrarloqueundio)
 
             } else {
-
+                console.log(agarrarloqueundio)
                 agarrarloqueundio = document.getElementById('ventanadelinput').innerHTML = ""
+                document.querySelector("body").removeEventListener("click", borrarfuncion);
             }
         })
     }
@@ -289,7 +294,7 @@ function colocartiempoeninput() {
         CurrentCuestion.time = min + ":" + ss
     }
 
-  
+
 }
 
 function infotime() {
@@ -320,11 +325,12 @@ function subiralalist(valueid) {
         Timer += min + ":" + ss
 
         CurrentCuestion.time = Timer
-    
+
     }
 
 
 }
+
 function respuestasparaseleccionar() {
 
     var respuestacorrecta = document.getElementById("respuestasparaseleccionar").value
@@ -332,7 +338,7 @@ function respuestasparaseleccionar() {
 
     CurrentCuestion.correct = respuestacorrecta
 
-   
+
 
 
 }
@@ -428,7 +434,7 @@ function ledioclickalbotonagregar() {
             confirmButtonText: 'Agregar'
         }).then((result) => {
             if (result.isConfirmed) {
-                
+
                 Swal.fire(
                     'Agregado exitosamente',
                     'La pregunta a sido agregada',
@@ -436,7 +442,7 @@ function ledioclickalbotonagregar() {
                 )
 
                 posision++
-                jsonData.preguntas.push({ ...CurrentCuestion })
+                jsonData.preguntas.push({...CurrentCuestion })
 
                 CurrentCuestion.responses = []
                 document.getElementById("aquiseagreganposiblesrespuestas").innerHTML = ""
@@ -498,10 +504,10 @@ function agregarvisualmentealasala() {
     <div id="preguntaagregadaenlositems${acoculadordelaspreguntasagregadas}" class="preguntaadentrodesupadre">
     <p>${jsonData.preguntas[jsonData.preguntas.length-1].question} </br>Score: ${ jsonData.preguntas[jsonData.preguntas.length-1].score}<p>
     </div>    
-    <div  id="basura${acoculadordelaspreguntasagregadas}" class="tresitems" onclick="eliminacion(id)">
+    <div  id="basura${acoculadordelaspreguntasagregadas}" title="borrar" class="tresitems" onclick="eliminacion(id)">
     <ion-icon name="trash-outline"></ion-icon>
     </div>
-    <div  id="desplegar${acoculadordelaspreguntasagregadas}"  class="tresitemsfinal" onclick="desplegaryeditar(id)" >
+    <div  id="desplegar${acoculadordelaspreguntasagregadas}"  title="Expandir"class="tresitemsfinal" onclick="desplegaryeditar(id)" >
 
     <ion-icon name="chevron-down-outline"></ion-icon>
     </div>
@@ -516,12 +522,13 @@ function agregarvisualmentealasala() {
 
 
     acoculadordelaspreguntasagregadas++
-    
+
 
 
 }
 
 var posision = 0
+
 function eliminacion(idio) {
 
     Swal.fire({
@@ -561,7 +568,7 @@ function eliminacion(idio) {
 
             padredelaeliminacion.parentNode.removeChild(padredelaeliminacion);
 
-           
+
         }
     })
 
@@ -575,63 +582,64 @@ function eliminacion(idio) {
 
 var disparador = false
 
-function desplegaryeditar(id){
-    
-    selector=document.getElementById(id).parentNode.parentNode.id
+function desplegaryeditar(id) {
+
+    selector = document.getElementById(id).parentNode.parentNode.id
     console.log(selector)
- jsonData.preguntas
-var lista= id.split("desplegar")
-    list= lista[1]
+    jsonData.preguntas
+    var lista = id.split("desplegar")
+    list = lista[1]
 
-state= (jsonData.preguntas[list].state==false)? jsonData.preguntas[list].state=true: jsonData.preguntas[list].state=false
+    state = (jsonData.preguntas[list].state == false) ? jsonData.preguntas[list].state = true : jsonData.preguntas[list].state = false
 
-if(state){
-   
-        if(document.getElementById("poscicion"+list)){
+    if (state) {
+        document.getElementById(id).title = 'Recoger'
+
+        if (document.getElementById("poscicion" + list)) {
             var largo = getComputedStyle(document.documentElement).getPropertyValue('--largo');
-            var larg = document.getElementById('poscicion'+list).clientHeight;
-             document.documentElement.style.setProperty('--largo', larg+'px');
-            
-              largo = getComputedStyle(document.documentElement).getPropertyValue('--largo');
-             console.log(largo)
-    
-            eliminarcuandohayalgo = document.getElementById("poscicion"+list)
+            var larg = document.getElementById('poscicion' + list).clientHeight;
+            document.documentElement.style.setProperty('--largo', larg + 'px');
+
+            largo = getComputedStyle(document.documentElement).getPropertyValue('--largo');
+            console.log(largo)
+
+            eliminarcuandohayalgo = document.getElementById("poscicion" + list)
             eliminarcuandohayalgo.parentNode.removeChild(eliminarcuandohayalgo);
 
-            }   
-           
-            
-    
+        }
 
-    document.getElementById(id).style=`transform: rotate(180deg);transition:1s;`
 
-    undivnuevo=document.createElement("div")
-    undivnuevo.setAttribute("id", "poscicion"+list);
 
-    
-    undivnuevo.classList.add("cuadrodesplegable")
 
-    console.log(undivnuevo)
-    document.querySelector("#"+selector).appendChild(undivnuevo);
-   
+        document.getElementById(id).style = `transform: rotate(180deg);transition:1s;`
 
-    document.getElementById("poscicion"+list).innerHTML=` 
+        undivnuevo = document.createElement("div")
+        undivnuevo.setAttribute("id", "poscicion" + list);
+
+
+        undivnuevo.classList.add("cuadrodesplegable")
+
+        console.log(undivnuevo)
+        document.querySelector("#" + selector).appendChild(undivnuevo);
+
+
+        document.getElementById("poscicion" + list).innerHTML = ` 
     <div class="contenodoredit textoedit" id="textoedit${list}">
     <div class="preguntaeditartext ">${jsonData.preguntas[list].question}</div>
-    <div class="preguntaediticon"> 
+    <div class="preguntaediticon" title="Editar"> 
         <ion-icon  title="editar respuesta" name="create-outline"></ion-icon>
     </div>
 </div>
 <div class="contenodoredit scoreoedit" id="scoreoedit${list}">
     <div class="preguntaeditartext">${jsonData.preguntas[list].score}</div>
-    <div class="preguntaediticon"> 
+    <div class="preguntaediticon" title="Editar"> 
         <ion-icon  title="editar respuesta" name="create-outline"></ion-icon>
     </div>
 </div>
 <div class="contenodoredit timetoedit" id="timetoedit${list}">
     <div class="preguntaeditartext"> ${retornatiempo(list)} </div>
 
-    <div class="preguntaediticon"> 
+    <div class="preguntaediticon" title="Editar"> 
         <ion-icon  title="editar respuesta" name="create-outline"> </ion-icon>
     </div>
 </div>
@@ -652,131 +660,255 @@ if(state){
     </select>
 </div>`
 
-var variable1=  document.getElementById("cambiar"+list).value
-console.log(variable1)
-for (let i = 0; i < jsonData.preguntas[list].responses.length; i++) {
-    if (i == variable1) {
-        
-    }else{
-        document.getElementById("cambiar"+list).innerHTML+=` <option value="${jsonData.preguntas[list].responses[i]}" >${jsonData.preguntas[list].responses[i]}</option>`
-        
+        var variable1 = document.getElementById("cambiar" + list).value
+        console.log(variable1)
+        for (let i = 0; i < jsonData.preguntas[list].responses.length; i++) {
+            if (i == variable1) {
+
+            } else {
+                document.getElementById("cambiar" + list).innerHTML += ` <option value="${jsonData.preguntas[list].responses[i]}" >${jsonData.preguntas[list].responses[i]}</option>`
+
+            }
+
+        }
+
+
+
+
+    } else {
+        document.getElementById(id).title = 'Expandir'
+        disparador = false
+
+        document.getElementById(id).style = `transform: rotate(0deg);transition:1s;`
+        clientHeight = document.getElementById('poscicion' + list).clientHeight;
+
+        var color = getComputedStyle(document.documentElement).getPropertyValue('--heigh');
+
+        document.documentElement.style.setProperty('--heigh', clientHeight + 'px');
+
+        color = getComputedStyle(document.documentElement).getPropertyValue('--heigh');
+        console.log(color)
+        document.getElementById("poscicion" + list).style = ' animation: cerrar 2s forwards'
+
     }
 
-}
-    
-    
-
-
-}else{
-    disparador = false
-    
-    document.getElementById(id).style=`transform: rotate(0deg);transition:1s;`
-    clientHeight = document.getElementById('poscicion'+list).clientHeight;
-    
-    var color = getComputedStyle(document.documentElement).getPropertyValue('--heigh');
-
-    document.documentElement.style.setProperty('--heigh', clientHeight+'px');
-   
-     color = getComputedStyle(document.documentElement).getPropertyValue('--heigh');
-    console.log(color)
-    document.getElementById("poscicion" +list).style=' animation: cerrar 2s forwards'
-
-}
-
-console.log(state)
+    console.log(state)
 
 
 
 
 
-console.log(id)
+    console.log(id)
 
-    
+
 
 }
 
 
- function retornatiempo(list,id){
-repla= jsonData.preguntas[list].time.replaceAll(" ","")
-    var timeautoormanual= (repla.length>1)?  jsonData.preguntas[list].time :  "0:25"
+function retornatiempo(list, id) {
+    repla = jsonData.preguntas[list].time.replaceAll(" ", "")
+    var timeautoormanual = (repla.length > 1) ? jsonData.preguntas[list].time : "0:25"
     return timeautoormanual
 
- }
-
-
- function colocarrespenlasala(list,id){
-  var  iter= (disparador==false)? disparador=true:disparador=false;
-
-    var largoderespuestas=jsonData.preguntas[list].responses.length
-
- var color = getComputedStyle(document.documentElement).getPropertyValue('--altp');
-
-    document.documentElement.style.setProperty('--altp', largoderespuestas+'9%');
-   
-     color = getComputedStyle(document.documentElement).getPropertyValue('--altp');
-
-if(disparador){
-    if(document.getElementById("nuevoelemento"+list)){
-        
-        eliminarcuandohayalgo = document.getElementById("nuevoelemento"+list)
-        eliminarcuandohayalgo.parentNode.removeChild(eliminarcuandohayalgo);
-    }
-        document.getElementById("desplegarrespuestaseditensala"+list).style=`transform: rotate(180deg);transition:1s;`
-        document.getElementById("textoedit"+list).style=`animation:animaciondelcuadroderespsala 1s forwards`
-        document.getElementById("scoreoedit"+list).style=`animation:animaciondelcuadroderespsala 1.5s forwards`
-        document.getElementById("timetoedit"+list).style=`animation:animaciondelcuadroderespsala 2s forwards`
-        document.getElementById("respoedit"+list).style=`animation:animaciondelcuadroderespsala 2.5s forwards`
-        document.getElementById("correctoedit"+list).style=`animation:animaciondelcuadroderespsala 3s forwards`
-        
-    
-    idpadre=document.getElementById(id).parentNode.parentNode.id
-    
-    console.log(idpadre)
-    nuevodiv= document.createElement("div")
-    nuevodiv.setAttribute("id","nuevoelemento"+list)
-    
-    document.querySelector("#"+idpadre).appendChild(nuevodiv);
-    nuevodiv.classList.add("responsesaddsala");
-        
- 
-    
-    for (let i = 0; i < jsonData.preguntas[list].responses.length; i++) {
-        
-        document.getElementById("nuevoelemento"+list).innerHTML+= `<p>${jsonData.preguntas[list].responses[i]}</p>`
-    }
-    
-
-}else{
-
-
-
-    document.getElementById("desplegarrespuestaseditensala"+list).style=`transform: rotate(180deg);transition:1s;`
-    document.getElementById("textoedit"+list).style=`animation:animaciondesplegar2 4s forwards`
-    document.getElementById("scoreoedit"+list).style=`animation:animaciondesplegar2 3.5s forwards`
-    document.getElementById("timetoedit"+list).style=`animation:animaciondesplegar2 3s forwards`
-    document.getElementById("respoedit"+list).style=`animation:animaciondesplegar2 2.5s forwards`
-    document.getElementById("correctoedit"+list).style=`animation:animaciondesplegar3 2s forwards`
-    document.getElementById("desplegarrespuestaseditensala"+list).style=`transform: rotate(0deg);transition:1s;`
-    var larg = document.getElementById('nuevoelemento'+list).clientHeight;
-    console.log(larg)
-    var color2 = getComputedStyle(document.documentElement).getPropertyValue('--otravar');
-
-    document.documentElement.style.setProperty('--otravar', larg+'px');
-   
-     color2 = getComputedStyle(document.documentElement).getPropertyValue('--otravar');
-
-    document.getElementById("nuevoelemento"+list).style=`animation:cerrarrespuestasa 1s forwards`
-    
 }
 
- }
 
- 
+function colocarrespenlasala(list, id) {
+    var iter = (disparador == false) ? disparador = true : disparador = false;
 
- function guardarnamesala(){
+    var largoderespuestas = jsonData.preguntas[list].responses.length
 
-    jsonData.namesala= document.getElementById("namesala").value
+    var color = getComputedStyle(document.documentElement).getPropertyValue('--altp');
 
-console.log(jsonData.namesala)
+    document.documentElement.style.setProperty('--altp', largoderespuestas + '9%');
 
- }
+    color = getComputedStyle(document.documentElement).getPropertyValue('--altp');
+
+    if (disparador) {
+        if (document.getElementById("nuevoelemento" + list)) {
+
+            eliminarcuandohayalgo = document.getElementById("nuevoelemento" + list)
+            eliminarcuandohayalgo.parentNode.removeChild(eliminarcuandohayalgo);
+        }
+        document.getElementById("desplegarrespuestaseditensala" + list).style = `transform: rotate(180deg);transition:1s;`
+        document.getElementById("textoedit" + list).style = `animation:animaciondelcuadroderespsala 1s forwards`
+        document.getElementById("scoreoedit" + list).style = `animation:animaciondelcuadroderespsala 1.5s forwards`
+        document.getElementById("timetoedit" + list).style = `animation:animaciondelcuadroderespsala 2s forwards`
+        document.getElementById("respoedit" + list).style = `animation:animaciondelcuadroderespsala 2.5s forwards`
+        document.getElementById("correctoedit" + list).style = `animation:animaciondelcuadroderespsala 3s forwards`
+
+
+        idpadre = document.getElementById(id).parentNode.parentNode.id
+
+        console.log(idpadre)
+        nuevodiv = document.createElement("div")
+        nuevodiv.setAttribute("id", "nuevoelemento" + list)
+
+        document.querySelector("#" + idpadre).appendChild(nuevodiv);
+        nuevodiv.classList.add("responsesaddsala");
+
+
+
+        for (let i = 0; i < jsonData.preguntas[list].responses.length; i++) {
+
+            document.getElementById("nuevoelemento" + list).innerHTML += `<p>${jsonData.preguntas[list].responses[i]}</p>`
+        }
+
+
+    } else {
+
+
+
+        document.getElementById("desplegarrespuestaseditensala" + list).style = `transform: rotate(180deg);transition:1s;`
+        document.getElementById("textoedit" + list).style = `animation:animaciondesplegar2 4s forwards`
+        document.getElementById("scoreoedit" + list).style = `animation:animaciondesplegar2 3.5s forwards`
+        document.getElementById("timetoedit" + list).style = `animation:animaciondesplegar2 3s forwards`
+        document.getElementById("respoedit" + list).style = `animation:animaciondesplegar2 2.5s forwards`
+        document.getElementById("correctoedit" + list).style = `animation:animaciondesplegar3 2s forwards`
+        document.getElementById("desplegarrespuestaseditensala" + list).style = `transform: rotate(0deg);transition:1s;`
+        var larg = document.getElementById('nuevoelemento' + list).clientHeight;
+        console.log(larg)
+        var color2 = getComputedStyle(document.documentElement).getPropertyValue('--otravar');
+
+        document.documentElement.style.setProperty('--otravar', larg + 'px');
+
+        color2 = getComputedStyle(document.documentElement).getPropertyValue('--otravar');
+
+        document.getElementById("nuevoelemento" + list).style = `animation:cerrarrespuestasa 1s forwards`
+
+    }
+
+}
+
+
+
+function guardarnamesala() {
+
+    jsonData.namesala = document.getElementById("namesala").value
+
+    console.log(jsonData.namesala)
+
+}
+
+
+
+var settingvalid = false
+
+function desplegarajust() {
+    if (settingvalid) {
+        settingvalid = false
+    } else {
+        settingvalid = true
+    }
+
+
+
+    if (settingvalid) {
+
+
+        document.getElementById("desplegarsetting").innerHTML = `<div class="moresetting" title="Configurar tiempo"  id="timesetting"><ion-icon name="stopwatch-outline"></ion-icon></div>
+    
+    <div class="moresetting" title="configurar metodo de calificacion" id="calificacion"><img class="icoimagecalificar"  src="Publicación de Facebook 940x788 px (1).png" alt="no se pudo cargar"></div>
+    <div class="moresetting" onclick="temasetting()" title="configurar tema" id="temasetting" ><ion-icon name="color-palette-outline"></ion-icon></div>`
+        var clientWidth1 = document.getElementById('desplegarsetting').clientWidth;
+        var color = getComputedStyle(document.documentElement).getPropertyValue('--anchoinicialsetting');
+
+        document.documentElement.style.setProperty('--anchoinicialsetting', clientWidth1 + 'px');
+
+        color = getComputedStyle(document.documentElement).getPropertyValue('--anchoinicialsetting');
+
+        document.getElementById("desplegarsetting").style = `animation: abrirsetting 2s forwards;height:30px;`
+    } else {
+        var clientWidth = document.getElementById('desplegarsetting').clientWidth;
+        var color2 = getComputedStyle(document.documentElement).getPropertyValue('--anchosetting');
+
+        document.documentElement.style.setProperty('--anchosetting', clientWidth + 'px');
+
+        color2 = getComputedStyle(document.documentElement).getPropertyValue('--anchosetting');
+
+        document.getElementById("desplegarsetting").style = `animation: cerrarsetting 2s forwards;height:30px;`
+    }
+
+
+
+    console.log(settingvalid)
+
+
+
+}
+
+var valriablelogicadelthema=false
+var osi=0
+function temasetting() {
+if(valriablelogicadelthema){
+    valriablelogicadelthema=false
+}else{
+    valriablelogicadelthema=true
+}
+
+if(valriablelogicadelthema){
+    document.getElementById("barradeasignacionsetting").style=' width: 100%;display:flex;justify-content:end;'
+    document.getElementById("barradeasignacionsetting").innerHTML=`
+    <div id="settingtheme" class="settingtheme">
+    
+    <p>Tema del Quiz</p>
+    <div class="coloresdisponibles">
+    <div class="azul"  onclick="subircolor('#00d6f9')"></div>
+    <div class="azul amarillo"  onclick="subircolor('#e6ff84')"></div>
+    <div class="azul verde"  onclick="subircolor('#7bf958')"></div>
+    <div class="azul violet"  onclick="subircolor('#c84ded')"></div>
+    <div class="azul duraz"  onclick="subircolor('#edaba1')"></div>
+    <div class="azul rojo"  onclick="subircolor('#ff9c53')"></div>
+    
+    </div>
+    <p class="ajustartext">Color personalizado</p>
+   
+    <input type="color" class="color_perzonalizado" value="#a544f0" >
+</div>
+    `
+    
+
+    if (document.getElementById('settingtheme')) {
+
+
+        document.querySelector("body").addEventListener('click', function borrarthema(a) {
+
+            
+            /*2. Si el div con id clickbox contiene a e. target*/
+            agarrarloqueundio = document.getElementById('settingtheme')
+            agarrarrelog = document.getElementById('temasetting')
+            if (agarrarloqueundio.contains(a.target) || agarrarrelog.contains(a.target)) {
+
+                console.log(agarrarloqueundio)
+
+            } else {
+                valriablelogicadelthema=false 
+                console.log(agarrarloqueundio)
+                agarrarloqueundio = document.getElementById('barradeasignacionsetting').innerHTML = ""
+                document.querySelector("body").removeEventListener("click", borrarthema);
+            }
+            
+        })
+    }
+    
+}else{
+    document.getElementById("barradeasignacionsetting").innerHTML=""
+
+}
+    
+
+}
+
+
+
+
+function subircolor(color){
+
+
+console.log(color)
+
+
+}
+
+
+

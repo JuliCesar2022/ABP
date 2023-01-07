@@ -10,17 +10,20 @@
 </head>
 
 <body>
-    
+
 
     <div class="ecerrardoscuadros">
 
         <!-- cuadro donde se crea la sala -->
-        <div class="cuadros cuadrocenter">
+        <div class="cuadros cuadrocenter" id="cuadrocrearsalaprimero">
 
             <div class="ajustesdelasala">
-
-                <ion-icon name="settings-outline"></ion-icon>
+                <div id="desplegarsetting" class="desplegarsetting"> </div>
+                <div id="ajustessala" title="Configuracion" onclick="desplegarajust()">
+                    <ion-icon name="settings-outline"></ion-icon>
+                </div>
             </div>
+            <div id="barradeasignacionsetting" class="sttlodesetting"></div>
             <!-- nombre de la Sala -->
             <input type="text" id="namesala" placeholder="nombre de la sala" onchange="guardarnamesala()">
             <!-- aqui se agregan las preguntas con todos sus datos  -->
@@ -37,7 +40,7 @@
         </div>
 
         <!-- cuadro donde se crean las preguntas -->
-        
+
         <div class="cuadros">
             <!-- ingreso de la pregunta -->
 
@@ -45,22 +48,21 @@
 
             <!-- este es un contenedor donde esta el score y el tiempo  -->
             <div class="contenedordeTimeyScore" id="contenedordeTimeyScore">
-                <input type="text" id="score" onkeyup="this.value=Numeros(this.value)" autocomplete="off" onkeydown="this.value=Numeros(this.value)" onkeypress="this.value=Numeros(this.value)" maxlength="4" onchange="guardarscore()" class="scoretime"  placeholder="Score" required>
-                
+                <input type="text" id="score" onkeyup="this.value=Numeros(this.value)" autocomplete="off" onkeydown="this.value=Numeros(this.value)" onkeypress="this.value=Numeros(this.value)" maxlength="4" onchange="guardarscore()" class="scoretime" placeholder="Score"
+                    required>
+
 
                 <div class="scoretime" id="timer" title="Tiempo">
-                  
-                    <input type="text" maxLength="2" onchange="subiralalist(id)" autocomplete="off" onkeyup="this.value=Numeros(this.value)" id="min"
-                        onfocus="ponerenfoque()" onblur="quitarenfoque()" placeholder="min" pattern="[0-9]*">
+
+                    <input type="text" maxLength="2" onchange="subiralalist(id)" autocomplete="off" onkeyup="this.value=Numeros(this.value)" id="min" onfocus="ponerenfoque()" onblur="quitarenfoque()" placeholder="min" pattern="[0-9]*">
                     <label onclick="autofocu()" for="">:</label>
-                    <input type="text" class="segundos" onchange="subiralalist(id)"  autocomplete="off" onkeyup="this.value=Numeros(this.value)" id="ss"
-                        onfocus="ponerenfoque()" onblur="quitarenfoque()" maxLength="2" placeholder="ss"
-                        pattern="[0-9]*">
+                    <input type="text" class="segundos" onchange="subiralalist(id)" autocomplete="off" onkeyup="this.value=Numeros(this.value)" id="ss" onfocus="ponerenfoque()" onblur="quitarenfoque()" maxLength="2" placeholder="ss" pattern="[0-9]*">
                     <div class="relog" onclick="autofocu()">
-                        
+
                         <div id="temporizador" class="contenedordelrelog" onclick="selecionartime()">
                             <ion-icon name="timer-outline"></ion-icon>
-                            </ion-icon></div>
+                            </ion-icon>
+                        </div>
                     </div>
                 </div>
 
@@ -68,14 +70,13 @@
             </div>
             <div id="selecion"></div>
             <!-- input donde se escribe la posible respuesta -->
-            <div class="contienetextareaparaescribirresp">   
-            <textarea name="" id="escribirposiblerespuesta" class="escribirposiblerespuesta" cols="23" placeholder="Escriba aqui una posible respuesta" rows="10"></textarea>
-        </div>
+            <div class="contienetextareaparaescribirresp">
+                <textarea name="" id="escribirposiblerespuesta" class="escribirposiblerespuesta" cols="23" placeholder="Escriba aqui una posible respuesta" rows="10"></textarea>
+            </div>
             <!-- <input type="text" id="escribirposiblerespuesta" class="escribirposiblerespuesta"> -->
             <!-- este es el boton de agregar respuesta -->
             <div class="containbtnrepuestagregar">
-                <input type="button" onclick="agg()" id="btnagregarrespuesta" class="btnagregarrespuesta"
-                    value="añadir respuesta">
+                <input type="button" onclick="agg()" id="btnagregarrespuesta" class="btnagregarrespuesta" value="añadir respuesta">
             </div>
             <!-- aqui se agregaran las posibles respuestas -->
             <div class="aquiseagreganposiblesrespuestas" id="aquiseagreganposiblesrespuestas">
@@ -90,15 +91,15 @@
                     <option value="1">--Escoja la respuesta correcta--</option>
                 </select>
             </div>
-<div class="contienelosbotones">
-    <input type="button" onclick="ledioclickalbotonagregar()" value="Agregar">
-    <input type="button" value="Limpiar"> 
+            <div class="contienelosbotones">
+                <input type="button" onclick="ledioclickalbotonagregar()" value="Agregar">
+                <input type="button" value="Limpiar">
 
-</div>
-            
+            </div>
 
 
-          
+
+
         </div>
 
 
@@ -107,7 +108,8 @@
 
 
 
-    
+
+
 
 
 
