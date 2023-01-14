@@ -22,11 +22,7 @@ CurrentCuestion = {
 
 
 
-Swal.fire({
-    icon: 'warning',
-    title: 'Advertencia',
-    text: 'Esta pagina aun esta en desarrollo',
-  })
+alert("Esta pagina se encuentra en desarrollo")
 
 if(jsonData.preguntas.length==0){
     document.getElementById("interna").innerHTML+='<div class="sinitems"><h1>NO HAY ITEMS</h1></div>'
