@@ -1,5 +1,9 @@
 jsonData = {
+
+    metododecalificacion: [true, false, false, false],
     namesala: "",
+
+    ajustegeneraldeltiempo: [true, false, false, false],
 
     preguntas: [
 
@@ -9,7 +13,7 @@ jsonData = {
 
     ],
 
-    Tema:null
+    Tema: "violet:#c84ded"
 
 }
 
@@ -55,7 +59,7 @@ function agg() {
     posiblerespuesta = document.getElementById("escribirposiblerespuesta").value
     validarquenoestevacio = posiblerespuesta.replaceAll(" ", "")
     document.getElementById("escribirposiblerespuesta").value = ""
-        //    validacion de mas de un dijito en el input para añadir respuesta
+    //    validacion de mas de un dijito en el input para añadir respuesta
     if (validarquenoestevacio.length > 0) {
         contar++;
 
@@ -190,10 +194,10 @@ function Numeros(string) { //Solo numeros
     //Recorrer el texto y verificar si el caracter se encuentra en la lista de validos 
     for (var i = 0; i < string.length; i++)
         if (filtro.indexOf(string.charAt(i)) != -1)
-        //Se añaden a la salida los caracteres validos
+            //Se añaden a la salida los caracteres validos
             out += string.charAt(i);
 
-        //Retornar valor filtrado
+    //Retornar valor filtrado
     return out;
 }
 
@@ -442,7 +446,7 @@ function ledioclickalbotonagregar() {
                 )
 
                 posision++
-                jsonData.preguntas.push({...CurrentCuestion })
+                jsonData.preguntas.push({ ...CurrentCuestion })
 
                 CurrentCuestion.responses = []
                 document.getElementById("aquiseagreganposiblesrespuestas").innerHTML = ""
@@ -502,7 +506,7 @@ function agregarvisualmentealasala() {
     
     <div class="row">
     <div id="preguntaagregadaenlositems${acoculadordelaspreguntasagregadas}" class="preguntaadentrodesupadre">
-    <p>${jsonData.preguntas[jsonData.preguntas.length-1].question} </br>Score: ${ jsonData.preguntas[jsonData.preguntas.length-1].score}<p>
+    <p>${jsonData.preguntas[jsonData.preguntas.length - 1].question} </br>Score: ${jsonData.preguntas[jsonData.preguntas.length - 1].score}<p>
     </div>    
     <div  id="basura${acoculadordelaspreguntasagregadas}" title="borrar" class="tresitems" onclick="eliminacion(id)">
     <ion-icon name="trash-outline"></ion-icon>
@@ -655,7 +659,7 @@ function desplegaryeditar(id) {
 </div>
 <div class="contenodoredit correctoedit" id="correctoedit${list}">
 <select name="" class="Stylocambiar" id="cambiar${list}">
-        <option value="${jsonData.preguntas[list].correct}" >${jsonData.preguntas[list].responses[parseInt(jsonData.preguntas[list].correct) ]}</option>
+        <option value="${jsonData.preguntas[list].correct}" >${jsonData.preguntas[list].responses[parseInt(jsonData.preguntas[list].correct)]}</option>
         
     </select>
 </div>`
@@ -806,9 +810,9 @@ function desplegarajust() {
     if (settingvalid) {
 
 
-        document.getElementById("desplegarsetting").innerHTML = `<div class="moresetting" title="Configurar tiempo"  id="timesetting"><ion-icon name="stopwatch-outline"></ion-icon></div>
+        document.getElementById("desplegarsetting").innerHTML = `<div class="moresetting" title="Configurar tiempo" onclick="condigurartiempodeljuego()" id="timesetting"><ion-icon name="stopwatch-outline"></ion-icon></div>
     
-    <div class="moresetting" title="configurar metodo de calificacion" id="calificacion"><img class="icoimagecalificar"  src="Publicación de Facebook 940x788 px (1).png" alt="no se pudo cargar"></div>
+    <div class="moresetting" title="configurar metodo de calificacion" id="calificacion" onclick="imgcalificacion()"><img class="icoimagecalificar"  src="imgcalificacion.png"   alt="no se pudo cargar"></div>
     <div class="moresetting" onclick="temasetting()" title="configurar tema" id="temasetting" ><ion-icon name="color-palette-outline"></ion-icon></div>`
         var clientWidth1 = document.getElementById('desplegarsetting').clientWidth;
         var color = getComputedStyle(document.documentElement).getPropertyValue('--anchoinicialsetting');
@@ -837,78 +841,417 @@ function desplegarajust() {
 
 }
 
-var valriablelogicadelthema=false
-var osi=0
-function temasetting() {
-if(valriablelogicadelthema){
-    valriablelogicadelthema=false
-}else{
-    valriablelogicadelthema=true
-}
 
-if(valriablelogicadelthema){
-    document.getElementById("barradeasignacionsetting").style=' width: 100%;display:flex;justify-content:end;'
-    document.getElementById("barradeasignacionsetting").innerHTML=`
+function temasetting() {
+    document.getElementById("calificacion").onclick = imgcalificacion
+    document.getElementById("temasetting").onclick = ""
+
+    var splitvariableiddecolor = jsonData.Tema.split(":")[0]
+
+    document.getElementById("barradeasignacionsetting").style = ' width: 100%;display:flex;justify-content:end;'
+    document.getElementById("barradeasignacionsetting").innerHTML = ``
+    document.getElementById("barradeasignacionsetting").innerHTML = `
     <div id="settingtheme" class="settingtheme">
     
     <p>Tema del Quiz</p>
     <div class="coloresdisponibles">
-    <div class="azul"  onclick="subircolor('#00d6f9')"></div>
-    <div class="azul amarillo"  onclick="subircolor('#e6ff84')"></div>
-    <div class="azul verde"  onclick="subircolor('#7bf958')"></div>
-    <div class="azul violet"  onclick="subircolor('#c84ded')"></div>
-    <div class="azul duraz"  onclick="subircolor('#edaba1')"></div>
-    <div class="azul rojo"  onclick="subircolor('#ff9c53')"></div>
+    <div class="azul" id="azul"  onclick="subircolor('#00d6f9',id)"></div>
+    <div class="azul amarillo" id="amarillo" onclick="subircolor('#e6ff84',id)"></div>
+    <div class="azul verde" id="verde" onclick="subircolor('#7bf958',id)"></div>
+    <div class="azul violet" id="violet" onclick="subircolor('#c84ded',id)"></div>
+    <div class="azul duraz" id="duraz" onclick="subircolor('#edaba1',id)"></div>
+    <div class="azul rojo" id="rojo" onclick="subircolor('#ff9c53',id)"></div>
     
     </div>
     <p class="ajustartext">Color personalizado</p>
-   
-    <input type="color" class="color_perzonalizado" value="#a544f0" >
-</div>
-    `
     
+    <input type="color" id="color_perzonalizado" onchange="subircolor(color_perzonalizado.value,id)" class="color_perzonalizado" value="#a544f0" >
+    </div>
+    `
+
+    document.getElementById(splitvariableiddecolor).style = "animation: identifier 1s forwards;"
 
     if (document.getElementById('settingtheme')) {
 
 
-        document.querySelector("body").addEventListener('click', function borrarthema(a) {
+        window.addEventListener('click', function borrarthema(a) {
+            try {
 
-            
-            /*2. Si el div con id clickbox contiene a e. target*/
-            agarrarloqueundio = document.getElementById('settingtheme')
-            agarrarrelog = document.getElementById('temasetting')
-            if (agarrarloqueundio.contains(a.target) || agarrarrelog.contains(a.target)) {
+                /*2. Si el div con id clickbox contiene a e. target*/
+                agarrarloqueundio = document.getElementById('settingtheme')
+                agarrarrelog = document.getElementById('temasetting')
+                var otrasopciones = document.getElementById("calificacion")
 
-                console.log(agarrarloqueundio)
+                if (agarrarloqueundio.contains(a.target) || agarrarrelog.contains(a.target)) {
 
-            } else {
-                valriablelogicadelthema=false 
-                console.log(agarrarloqueundio)
-                agarrarloqueundio = document.getElementById('barradeasignacionsetting').innerHTML = ""
-                document.querySelector("body").removeEventListener("click", borrarthema);
+
+                    console.log(a.target)
+
+                }
+                else {
+                    console.log(agarrarloqueundio)
+                    document.getElementById("temasetting").onclick = temasetting
+                    agarrarloqueundio = document.getElementById('barradeasignacionsetting').innerHTML = ""
+                    window.removeEventListener("click", borrarthema);
+
+                }
+            } catch (e) {
+                window.removeEventListener("click", borrarthema);
+
             }
-            
+
+
+
         })
     }
+
+
+
+
+}
+
+
+
+
+function subircolor(color, id) {
+
+    document.getElementById("verde").style = ""
+    document.getElementById("azul").style = ""
+    document.getElementById("amarillo").style = ""
+    document.getElementById("violet").style = "border: 1px solid black;"
+    document.getElementById("duraz").style = ""
+    document.getElementById("rojo").style = ""
+    document.getElementById("color_perzonalizado").style = ""
+    document.getElementById(id).style = "animation: identifier 1s forwards;"
+    jsonData.Tema = `${id}:${color}`
+
+    console.log(color)
+
+
+}
+
+
+function imgcalificacion() {
+    document.getElementById("calificacion").onclick = ""
+    document.getElementById("temasetting").onclick = temasetting
+    console.log("hola")
+    document.getElementById("barradeasignacionsetting").innerHTML = ``
+    document.getElementById("barradeasignacionsetting").style = ' width: 65%;display:flex;justify-content:end;'
+    document.getElementById("barradeasignacionsetting").innerHTML = `
+    <div id="settingcalificacion" class="settingtheme">
+    <div class="metododecalifique">
+    <p class="title"> Metodo de calificacion</p>
+    </div>
+    <div id="interruptor1"  class="interruptor">
+
+    <div class="encerrartextodeopccalificacion">
+        <p>Calificar por score<p>
+        </div>
+        <div id="circuloprincipaldelinterruptor1" class="circuloprincipaldelinterruptor" onclick="interruptoractivar(id)"> 
+            <div id="circulodentrodelinterruptor"></div>
+        </div>
+    </div>        
+    <div id="interruptor2" class="interruptor">
+    <div class="encerrartextodeopccalificacion"> 
+        <p>Calificar con promedio de 1-5<p>
+        </div>
+        <div id="circuloprincipaldelinterruptor2" class="circuloprincipaldelinterruptor" onclick="interruptoractivar(id)"> 
+            <div id="circulodentrodelinterruptor"></div>
+            
+        </div>
+    </div>        
+    <div id="interruptor3" class="interruptor"> 
+    <div class="encerrartextodeopccalificacion">
+        <p>Calificar con promedio de 1-10<p>
+        </div>
+        <div id="circuloprincipaldelinterruptor3"  class="circuloprincipaldelinterruptor" onclick="interruptoractivar(id)"> 
+            <div id="circulodentrodelinterruptor"></div>
+        </div>
+    </div>        
+    <div id="interruptor4" class="interruptor"> 
+    <div class="encerrartextodeopccalificacion">
+        <p>Sin calificacion<p>
+        </div>
+        <div id="circuloprincipaldelinterruptor4" class="circuloprincipaldelinterruptor" onclick="interruptoractivar(id)"> 
+            <div id="circulodentrodelinterruptor"></div>
+        </div>
+    </div>        
+    </div>
+     `
+    if (document.getElementById('settingcalificacion')) {
+
+
+        window.addEventListener('click', function borrmetodoecalificacion(d) {
+
+            try {
+
+                /*2. Si el div con id clickbox contiene a e. target*/
+                agarrarloqueundio = document.getElementById('settingcalificacion')
+                var otrasopciones = document.getElementById("calificacion")
+
+                if (agarrarloqueundio.contains(d.target) || otrasopciones.contains(d.target)) {
+
+
+                    console.log(d.target)
+
+                }
+                else {
+                    console.log(agarrarloqueundio)
+                    document.getElementById("calificacion").onclick = imgcalificacion
+                    agarrarloqueundio = document.getElementById('barradeasignacionsetting').innerHTML = ""
+                    window.removeEventListener("click", borrmetodoecalificacion);
+
+                }
+            } catch (e) {
+                console.log("error")
+                window.removeEventListener("click", borrmetodoecalificacion);
+
+            }
+
+
+
+        })
+    }
+
+    if (jsonData.metododecalificacion[0]) {
+        document.getElementById("circuloprincipaldelinterruptor1").style = `background: #00D43A;`
+        document.getElementById("circuloprincipaldelinterruptor1").childNodes[1].style = `transform: translate(100%) scale(1.23);`
+    }
+
+
+    if (jsonData.metododecalificacion[1]) {
+        document.getElementById("circuloprincipaldelinterruptor2").style = `background: #00D43A;`
+        document.getElementById("circuloprincipaldelinterruptor2").childNodes[1].style = `transform: translate(100%) scale(1.23);`
+    }
+    if (jsonData.metododecalificacion[2]) {
+        document.getElementById("circuloprincipaldelinterruptor3").style = `background: #00D43A;`
+        document.getElementById("circuloprincipaldelinterruptor3").childNodes[1].style = `transform: translate(100%) scale(1.23);`
+    }
+    if (jsonData.metododecalificacion[3]) {
+        document.getElementById("circuloprincipaldelinterruptor4").style = `background: #00D43A;`
+        document.getElementById("circuloprincipaldelinterruptor4").childNodes[1].style = `transform: translate(100%) scale(1.23);`
+    }
+
+}
+function interruptoractivar(id) {
+
+    console.log(id)
+
+    var numerodelalistametodosdecalificacion = id.split('circuloprincipaldelinterruptor')
+    var textoconvertirenentero = parseInt(numerodelalistametodosdecalificacion[1])
+    if (!jsonData.metododecalificacion[textoconvertirenentero - 1]) {
+        jsonData.metododecalificacion[textoconvertirenentero - 1] = true
+        document.getElementById(id).style = 'background: #00D43A;'
+        document.getElementById(id).childNodes[1].style = '   animation: interrubtoractivar 1s forwards;'
+
+        if (jsonData.metododecalificacion[3]) {
+            jsonData.metododecalificacion[0] = false
+            document.getElementById("circuloprincipaldelinterruptor1").style = "#0303036f;"
+            document.getElementById("circuloprincipaldelinterruptor1").childNodes[1].style = "animation: interrubtoractivarreversa 1s forwards;"
+            jsonData.metododecalificacion[1] = false
+            document.getElementById("circuloprincipaldelinterruptor2").style = "#0303036f;"
+            document.getElementById("circuloprincipaldelinterruptor2").childNodes[1].style = "animation: interrubtoractivarreversa 1s forwards;"
+            jsonData.metododecalificacion[2] = false
+            document.getElementById("circuloprincipaldelinterruptor3").style = "#0303036f;"
+            document.getElementById("circuloprincipaldelinterruptor3").childNodes[1].style = "animation: interrubtoractivarreversa 1s forwards;"
+
+        }
+    } else {
+        jsonData.metododecalificacion[textoconvertirenentero - 1] = false
+        document.getElementById(id).style = 'background: #0303036f;'
+
+        document.getElementById(id).childNodes[1].style = 'animation: interrubtoractivarreversa 1s forwards      ;'
+
+
+        if (!jsonData.metododecalificacion[0] && !jsonData.metododecalificacion[1] && !jsonData.metododecalificacion[2] && !jsonData.metododecalificacion[3]) {
+            console.log("ninguna activa")
+            jsonData.metododecalificacion[0] = true
+            document.getElementById("circuloprincipaldelinterruptor1").style = 'background: #00D43A;'
+            document.getElementById("circuloprincipaldelinterruptor1").childNodes[1].style = 'animation: interrubtoractivar 1s forwards;'
+
+
+        }
+
+    }
+
+
+
+}
+
+
+
+
+
+function condigurartiempodeljuego() {
+    document.getElementById("temasetting").onclick = temasetting
+    document.getElementById("calificacion").onclick = imgcalificacion
+    document.getElementById("barradeasignacionsetting").innerHTML = ``
+    document.getElementById("barradeasignacionsetting").style = ' width: 30%;display:flex;justify-content:end;'
+    document.getElementById("barradeasignacionsetting").innerHTML = `
+    <div id="settingtiempodelasala" class="settingtheme"> 
     
-}else{
-    document.getElementById("barradeasignacionsetting").innerHTML=""
-
-}
+    <div> <p class="title">Ajustar el tiempo  </p></div>
     
+    <div id="interruptor1"  class="interruptor">
+    
+    <div class="encerrartextodeopccalificacion">
+    <p>tiempo por preguntas ajustado manualmente<p>
+    </div>
+    <div id="circuloprincipaldelinterruptor1" class="circuloprincipaldelinterruptor" onclick="interruptortimesetting(id)"> 
+    <div id="circulodentrodelinterruptor"></div>
+    </div>
+    </div>        
+    <div id="interruptor2" class="interruptor">
+    <div class="encerrartextodeopccalificacion"> 
+    <p>tiempo para terminar el examen completo<p>
+    </div>
+    <div id="circuloprincipaldelinterruptor2" class="circuloprincipaldelinterruptor" onclick="interruptortimesetting(id)"> 
+    <div id="circulodentrodelinterruptor"></div>
+    
+    </div>
+    
+    </div>  
+     <div class="scoretime timeheigh" id="timersettinggenral1" title="Tiempo">
+
+                    <input type="text" maxLength="2" onchange="subiralalist(id)" autocomplete="off" onkeyup="this.value=Numeros(this.value)" id="min"  placeholder="min" pattern="[0-9]*"  readonly>
+                    <label " for="">:</label>
+                    <input type="text" class="segundos" onchange="subiralalist(id)" autocomplete="off" onkeyup="this.value=Numeros(this.value)" id="ss"  maxLength="2" placeholder="ss" pattern="[0-9]*" readonly>
+                    <div class="relog" >
+
+                        <div id="temporizadorsettingtsala" class="contenedordelrelog" onclick="selecionartime()">
+                            <ion-icon name="timer-outline"></ion-icon>
+                            
+                        </div>
+                    </div>
+                </div>      
+    <div id="interruptor3" class="interruptor"> 
+    <div class="encerrartextodeopccalificacion">
+    <p>Tiempo igual para responder cada pregunta<p>
+    </div>
+    <div id="circuloprincipaldelinterruptor3"  class="circuloprincipaldelinterruptor" onclick="interruptortimesetting(id)"> 
+    <div id="circulodentrodelinterruptor"></div>
+    </div>
+    
+    </div> 
+     <div class="scoretime timeheigh" id="timersettinggenral2" title="Tiempo">
+
+                    <input type="text" maxLength="2"  autocomplete="off" onkeyup="this.value=Numeros(this.value)" id="min"   placeholder="min" pattern="[0-9]*" readonly>
+                    <label onclick="autofocu()" for="">:</label>
+                    <input type="text" class="segundossettingsala" autocomplete="off" onkeyup="this.value=Numeros(this.value)" id="ssettingsala"  maxLength="2" placeholder="ss" pattern="[0-9]*" readonly>
+                    <div class="relog" >
+
+                        <div id="temporizadorsettingtsala2" class="contenedordelrelog" >
+                            <ion-icon name="timer-outline"></ion-icon>
+                            
+                        </div>
+                    </div>
+                </div>       
+    <div id="interruptor4" class="interruptor">
+    <div class="encerrartextodeopccalificacion"> 
+    <p>Sin tiempo limite<p>
+    </div>
+    <div id="circuloprincipaldelinterruptor4" class="circuloprincipaldelinterruptor" onclick="interruptortimesetting(id)"> 
+    <div id="circulodentrodelinterruptor"></div>
+    
+    </div>
+    </div>        
+    
+    
+    
+    
+    </div>`
+    document.getElementById("settingtiempodelasala").style='height:250px'
+
+    if (jsonData.ajustegeneraldeltiempo[0]) {
+        document.getElementById("circuloprincipaldelinterruptor1").style = `background: #00D43A;`
+        document.getElementById("circuloprincipaldelinterruptor1").childNodes[1].style = `transform: translate(100%) scale(1.23);`
+    }
+
+
+    if (jsonData.ajustegeneraldeltiempo[1]) {
+        document.getElementById("timersettinggenral1").innerHTML=` <input type="text" maxLength="2"  autocomplete="off" onkeyup="this.value=Numeros(this.value)" id="min"  placeholder="min" pattern="[0-9]*"  >
+        <label " for="">:</label>
+        <input type="text" class="segundos" autocomplete="off" onkeyup="this.value=Numeros(this.value)" id="ss"  maxLength="2" placeholder="ss" pattern="[0-9]*" >
+        <div class="relog">
+
+            <div id="temporizadorsettingtsala" class="contenedordelrelog" >
+                <ion-icon name="timer-outline"></ion-icon>
+                
+            </div>
+        </div>`
+        document.getElementById("circuloprincipaldelinterruptor2").style = `background: #00D43A;`
+        document.getElementById("circuloprincipaldelinterruptor2").childNodes[1].style = `transform: translate(100%) scale(1.23);`
+    }else{
+        document.getElementsByClassName("timeheigh")[0].style='opacity: 0.5'
+        document.getElementById("temporizadorsettingtsala").onclick=''
+       
+    }
+    if (jsonData.ajustegeneraldeltiempo[2]) {
+        document.getElementById("circuloprincipaldelinterruptor3").style = `background: #00D43A;`
+        document.getElementById("circuloprincipaldelinterruptor3").childNodes[1].style = `transform: translate(100%) scale(1.23);`
+    }else{
+        document.getElementsByClassName("timeheigh")[1].style='opacity: 0.5'
+        document.getElementById("temporizadorsettingtsala2").onclick=''
+
+    }
+    if (jsonData.ajustegeneraldeltiempo[3]) {
+        document.getElementById("circuloprincipaldelinterruptor4").style = `background: #00D43A;`
+        document.getElementById("circuloprincipaldelinterruptor4").childNodes[1].style = `transform: translate(100%) scale(1.23);`
+    }
+
+
+
+
 
 }
 
 
 
 
-function subircolor(color){
+
+function interruptortimesetting(id){
+    console.log(id)
 
 
-console.log(color)
+    var numerodelalistametodosdecalificacion = id.split('circuloprincipaldelinterruptor')
+    var textoconvertirenentero = parseInt(numerodelalistametodosdecalificacion[1])
+    if (!jsonData.ajustegeneraldeltiempo[textoconvertirenentero - 1]) {
+        
+       
+        jsonData.ajustegeneraldeltiempo[textoconvertirenentero - 1] = true
+        document.getElementById(id).style = 'background: #00D43A;'
+        document.getElementById(id).childNodes[1].style = '   animation: interrubtoractivar 1s forwards;'
+        for (let contadorsttingtiempo = 0; contadorsttingtiempo < jsonData.ajustegeneraldeltiempo.length; contadorsttingtiempo++) {
+            var contadordentrodeestefor=contadorsttingtiempo+1
+            if(textoconvertirenentero!=contadorsttingtiempo+1){
+
+                if(jsonData.ajustegeneraldeltiempo[contadorsttingtiempo]){
+                    
+                    jsonData.ajustegeneraldeltiempo[contadorsttingtiempo]=false
+                    console.log("se hace")
+                    document.getElementById("circuloprincipaldelinterruptor"+contadordentrodeestefor).style='background: #0303036f;'
+                    document.getElementById("circuloprincipaldelinterruptor"+contadordentrodeestefor).childNodes[1].style='animation: interrubtoractivarreversa 1s forwards;'
+                }
+            }
+        }
+       
+    } else {
+        jsonData.ajustegeneraldeltiempo[textoconvertirenentero - 1] = false
+        document.getElementById(id).style = 'background: #0303036f;'
+
+        document.getElementById(id).childNodes[1].style = 'animation: interrubtoractivarreversa 1s forwards      ;'
+
+
+        if (!jsonData.ajustegeneraldeltiempo[0] && !jsonData.ajustegeneraldeltiempo[1] && !jsonData.ajustegeneraldeltiempo[2] && !jsonData.ajustegeneraldeltiempo[3]) {
+            console.log("ninguna activa")
+            jsonData.ajustegeneraldeltiempo[0] = true
+            document.getElementById("circuloprincipaldelinterruptor1").style = 'background: #00D43A;'
+            document.getElementById("circuloprincipaldelinterruptor1").childNodes[1].style = 'animation: interrubtoractivar 1s forwards;'
+
+
+        }
+
+    }
 
 
 }
-
-
-

@@ -20,6 +20,12 @@ CurrentCuestion = {
     vale: null
 }
 
+Swal.fire({
+    icon: 'warning',
+    title: 'Advertencia',
+    text: 'Esta pagina aun esta en desarrollo',
+  })
+
 
 
 if(jsonData.preguntas.length==0){
