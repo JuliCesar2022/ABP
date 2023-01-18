@@ -4,7 +4,8 @@ jsonData = {
     namesala: "",
 
     ajustegeneraldeltiempo: [true, false, false, false],
-
+    activotiempocompleto: { time:"00:10:00"},
+    activotiempoigual: {time:""},
     preguntas: [
 
     ],
@@ -201,6 +202,7 @@ function Numeros(string) { //Solo numeros
     return out;
 }
 
+
 function autofocu() {
 
     document.getElementById("ss").focus()
@@ -217,7 +219,7 @@ function selecionartime() {
 
         <div class="elegirhora" id="elegirhora">
         <p>min</p>
-        <select class="selec" onchange="colocartiempoeninput()" size="7" id="select2">
+        <select class="selec" onchange="colocartiempoeninput(CurrentCuestion)" size="7" id="select2">
         
         
         
@@ -225,7 +227,7 @@ function selecionartime() {
         </div>
         <div class="elegirhora" id="elegirhora">
         <p>ss</p>
-        <select class="selec" size="7" onchange="colocartiempoeninput()" id="select3">
+        <select class="selec" size="7" onchange="colocartiempoeninput(CurrentCuestion)" id="select3">
         
         
         
@@ -248,19 +250,18 @@ function selecionartime() {
     document.getElementById("select2").innerHTML = ``
     document.getElementById("select3").innerHTML = ``
 
-    for (let i = 0; i < 60; i++) {
-        document.getElementById("select2").innerHTML += `<option  class="styloiption" value="${i}">${i}</option> `
-        if (document.getElementById("min").value.length > 0) {
-            document.getElementById("select2").value = document.getElementById("min").value
+    var listadedondecolocarnumeros = {
+        seleccion3: "",
+        hora: "",
+        seleccion1: "select2",
+        minutos: "min",
+        seleccion2: "select3",
+        segundos: "ss",
 
-        }
-        document.getElementById("select3").innerHTML += `<option  class="styloiption" value="${i}">${i}</option> `
 
-        if (document.getElementById("ss").value.length > 0) {
-            document.getElementById("select3").value = document.getElementById("ss").value
-
-        }
     }
+
+    colocarnumerostime(listadedondecolocarnumeros)
 
     if (document.getElementById('selecion')) {
 
@@ -281,8 +282,56 @@ function selecionartime() {
     }
 }
 
+function colocarnumerostime(listadedondecolocarnumeros) {
+    console.log(listadedondecolocarnumeros)
+    for (let i = 0; i < 60; i++) {
 
-function colocartiempoeninput() {
+
+        if (i < 10) {
+            document.getElementById(listadedondecolocarnumeros.seleccion1).innerHTML += `<option  class="styloiption" value="0${i}">0${i}</option> `
+        } else {
+
+            document.getElementById(listadedondecolocarnumeros.seleccion1).innerHTML += `<option  class="styloiption" value="${i}">${i}</option> `
+        }
+        if (document.getElementById(listadedondecolocarnumeros.minutos).value.length > 0) {
+            document.getElementById(listadedondecolocarnumeros.seleccion1).value = document.getElementById(listadedondecolocarnumeros.minutos).value
+
+        }
+
+
+        if (i < 10) {
+            document.getElementById(listadedondecolocarnumeros.seleccion2).innerHTML += `<option  class="styloiption" value="0${i}">0${i}</option> `
+        } else {
+
+            document.getElementById(listadedondecolocarnumeros.seleccion2).innerHTML += `<option  class="styloiption" value="${i}">${i}</option> `
+        }
+
+        if (document.getElementById(listadedondecolocarnumeros.segundos).value.length > 0) {
+            document.getElementById(listadedondecolocarnumeros.seleccion2).value = document.getElementById(listadedondecolocarnumeros.segundos).value
+
+        }
+
+        if (listadedondecolocarnumeros.seleccion3 != "" || listadedondecolocarnumeros.hora != "") {
+
+            if (i < 10) {
+                document.getElementById(listadedondecolocarnumeros.seleccion3).innerHTML += `<option  class="styloiption" value="0${i}">0${i}</option> `
+            } else {
+
+                document.getElementById(listadedondecolocarnumeros.seleccion3).innerHTML += `<option  class="styloiption" value="${i}">${i}</option> `
+            }
+            if (document.getElementById(listadedondecolocarnumeros.hora).value.length > 0) {
+                document.getElementById(listadedondecolocarnumeros.seleccion3).value = document.getElementById(listadedondecolocarnumeros.hora).value
+    
+            }
+
+
+        }
+
+
+    }
+}
+
+function colocartiempoeninput(aquiseguard) {
 
     minuto = document.getElementById("select2").value
     document.getElementById("min").value = minuto
@@ -295,11 +344,15 @@ function colocartiempoeninput() {
     ss = document.getElementById("ss").value
     if (min.length > 0 && ss.length > 0) {
 
-        CurrentCuestion.time = min + ":" + ss
+        aquiseguard.time = min + ":" + ss
     }
 
 
 }
+
+
+
+
 
 function infotime() {
     if (logica) {
@@ -316,21 +369,31 @@ function infotime() {
 
 }
 
-function subiralalist(valueid) {
+function subiralalist(listadevaloresacomular,aquiseguardalavariable) {
+    console.log(aquiseguardalavariable)
+
+
+
+
     Timer = ""
-    min = document.getElementById("min").value
-    ss = document.getElementById("ss").value
+    
+    for(let rl=0;rl<listadevaloresacomular.length;rl++){
+
+        Timer+= document.getElementById(listadevaloresacomular[rl]).value
+        if(rl!=listadevaloresacomular.length-1){
+            Timer+=":"
+        }
 
 
 
-
-
-    if (min.length > 0 && ss.length > 0) {
-        Timer += min + ":" + ss
-
-        CurrentCuestion.time = Timer
 
     }
+
+
+    aquiseguardalavariable.time=Timer
+
+
+    console.log(Timer+"este es el timer")
 
 
 }
@@ -1020,6 +1083,11 @@ function imgcalificacion() {
 
 
     if (jsonData.metododecalificacion[1]) {
+
+       
+
+        
+
         document.getElementById("circuloprincipaldelinterruptor2").style = `background: #00D43A;`
         document.getElementById("circuloprincipaldelinterruptor2").childNodes[1].style = `transform: translate(100%) scale(1.23);`
     }
@@ -1085,6 +1153,7 @@ function interruptoractivar(id) {
 function condigurartiempodeljuego() {
     document.getElementById("temasetting").onclick = temasetting
     document.getElementById("calificacion").onclick = imgcalificacion
+    // document.getElementById("timesetting").onclick = ""
     document.getElementById("barradeasignacionsetting").innerHTML = ``
     document.getElementById("barradeasignacionsetting").style = ' width: 30%;display:flex;justify-content:end;'
     document.getElementById("barradeasignacionsetting").innerHTML = `
@@ -1111,41 +1180,17 @@ function condigurartiempodeljuego() {
     </div>
     
     </div>  
-     <div class="scoretime timeheigh" id="timersettinggenral1" title="Tiempo">
 
-                    <input type="text" maxLength="2" onchange="subiralalist(id)" autocomplete="off" onkeyup="this.value=Numeros(this.value)" id="min"  placeholder="min" pattern="[0-9]*"  readonly>
-                    <label " for="">:</label>
-                    <input type="text" class="segundos" onchange="subiralalist(id)" autocomplete="off" onkeyup="this.value=Numeros(this.value)" id="ss"  maxLength="2" placeholder="ss" pattern="[0-9]*" readonly>
-                    <div class="relog" >
 
-                        <div id="temporizadorsettingtsala" class="contenedordelrelog" onclick="selecionartime()">
-                            <ion-icon name="timer-outline"></ion-icon>
-                            
-                        </div>
-                    </div>
-                </div>      
-    <div id="interruptor3" class="interruptor"> 
-    <div class="encerrartextodeopccalificacion">
-    <p>Tiempo igual para responder cada pregunta<p>
-    </div>
-    <div id="circuloprincipaldelinterruptor3"  class="circuloprincipaldelinterruptor" onclick="interruptortimesetting(id)"> 
-    <div id="circulodentrodelinterruptor"></div>
-    </div>
-    
-    </div> 
-     <div class="scoretime timeheigh" id="timersettinggenral2" title="Tiempo">
 
-                    <input type="text" maxLength="2"  autocomplete="off" onkeyup="this.value=Numeros(this.value)" id="min"   placeholder="min" pattern="[0-9]*" readonly>
-                    <label onclick="autofocu()" for="">:</label>
-                    <input type="text" class="segundossettingsala" autocomplete="off" onkeyup="this.value=Numeros(this.value)" id="ssettingsala"  maxLength="2" placeholder="ss" pattern="[0-9]*" readonly>
-                    <div class="relog" >
+<div id="tiempo1setting1" class="tiempo1setting"></div>
 
-                        <div id="temporizadorsettingtsala2" class="contenedordelrelog" >
-                            <ion-icon name="timer-outline"></ion-icon>
-                            
-                        </div>
-                    </div>
-                </div>       
+
+
+
+
+
+       
     <div id="interruptor4" class="interruptor">
     <div class="encerrartextodeopccalificacion"> 
     <p>Sin tiempo limite<p>
@@ -1156,45 +1201,62 @@ function condigurartiempodeljuego() {
     </div>
     </div>        
     
-    
-    
+   
+    <div id="timenotes">
+        
+    </div>
     
     </div>`
-    document.getElementById("settingtiempodelasala").style='height:250px'
+    document.getElementById("settingtiempodelasala").style = 'height:200px'
 
     if (jsonData.ajustegeneraldeltiempo[0]) {
+        document.getElementById("timenotes").innerHTML=`<p><b>Nota: </b> Esta opcion ajustara el tiempo para responder una pregunta segun lo indicado en el formulario. si no encuentra tal formulario.  <a href="#linkcuadro2">click aqui</a></p>`
         document.getElementById("circuloprincipaldelinterruptor1").style = `background: #00D43A;`
         document.getElementById("circuloprincipaldelinterruptor1").childNodes[1].style = `transform: translate(100%) scale(1.23);`
     }
 
 
     if (jsonData.ajustegeneraldeltiempo[1]) {
-        document.getElementById("timersettinggenral1").innerHTML=` <input type="text" maxLength="2"  autocomplete="off" onkeyup="this.value=Numeros(this.value)" id="min"  placeholder="min" pattern="[0-9]*"  >
-        <label " for="">:</label>
-        <input type="text" class="segundos" autocomplete="off" onkeyup="this.value=Numeros(this.value)" id="ss"  maxLength="2" placeholder="ss" pattern="[0-9]*" >
-        <div class="relog">
 
-            <div id="temporizadorsettingtsala" class="contenedordelrelog" >
-                <ion-icon name="timer-outline"></ion-icon>
-                
-            </div>
-        </div>`
+        document.getElementById("timenotes").innerHTML=`<p><b>Nota: </b> Esta opcion fijara el tiempo para terminar todo el Quiz</p>`
+
+        document.getElementById("tiempo1setting1").innerHTML=`
+                        <div class="scoretime sore1" id="timersetting" title="Tiempo">
+                        <input type="text" maxLength="2"  autocomplete="off" onkeydown="  validaciondelosinputtime(id,event, 'ajsutesminutos ajustessegundos' ); subiralalist(['ajsuteshora','ajsutesminutos','ajustessegundos'],jsonData.activotiempocompleto); return (event.key >= 48 && event.key <= 53)" id="ajsuteshora" onfocus="" onblur="" placeholder="Hr" pattern="[0-9]*">
+
+                        <label onclick="" for="">:</label>
+
+                        <input type="text" maxLength="2" " autocomplete="off" onkeydown="  validaciondelosinputtime(id,event, 'ajsuteshora ajustessegundos' ); subiralalist(['ajsuteshora','ajsutesminutos','ajustessegundos'],jsonData.activotiempocompleto); return (event.key >= 48 && event.key <= 53)" id="ajsutesminutos" onfocus="" onblur="" placeholder="min" pattern="[0-9]*">
+                        <label onclick="" for="">:</label>
+                        <input type="text" class="segundos"  autocomplete="off" onkeydown=" validaciondelosinputtime(id,event,'ajsuteshora ajsutesminutos'); subiralalist(['ajsuteshora','ajsutesminutos','ajustessegundos'],jsonData.activotiempocompleto); return (event.key >= 46 && event.key <= 57)" id="ajustessegundos" onfocus="" onblur="" maxLength="2" placeholder="ss" pattern="[0-9]*">
+                        <div class="relog" onclick="">
+        
+                            <div id="contenedordelrelogensetting" class="contenedordelrelog" onclick="mostrarcuadroconselectsetting()">
+                                <ion-icon name="timer-outline"></ion-icon>
+        
+                            </div>
+                            </div>
+                        </div>`
+                        document.getElementById("tiempo1setting1").style='animation: nameanimationtiempo 1s forwards'
+                        
+document.getElementById("ajsuteshora").focus()
+
+
+        var hrminss= jsonData.activotiempocompleto.time.split(":")
+
+        document.getElementById("ajsuteshora").value= hrminss[0]
+        document.getElementById("ajsutesminutos").value=hrminss[1]
+        document.getElementById("ajustessegundos").value=hrminss[2]
+
+        console.log(jsonData.activotiempocompleto.time+"hacer porfavorrororooro")
+
+
+
         document.getElementById("circuloprincipaldelinterruptor2").style = `background: #00D43A;`
         document.getElementById("circuloprincipaldelinterruptor2").childNodes[1].style = `transform: translate(100%) scale(1.23);`
-    }else{
-        document.getElementsByClassName("timeheigh")[0].style='opacity: 0.5'
-        document.getElementById("temporizadorsettingtsala").onclick=''
-       
-    }
-    if (jsonData.ajustegeneraldeltiempo[2]) {
-        document.getElementById("circuloprincipaldelinterruptor3").style = `background: #00D43A;`
-        document.getElementById("circuloprincipaldelinterruptor3").childNodes[1].style = `transform: translate(100%) scale(1.23);`
-    }else{
-        document.getElementsByClassName("timeheigh")[1].style='opacity: 0.5'
-        document.getElementById("temporizadorsettingtsala2").onclick=''
-
     }
     if (jsonData.ajustegeneraldeltiempo[3]) {
+        document.getElementById("timenotes").innerHTML=`<p><b>Nota: </b>esta opcion desactivara el tiempo para terminar el Quiz </p>`
         document.getElementById("circuloprincipaldelinterruptor4").style = `background: #00D43A;`
         document.getElementById("circuloprincipaldelinterruptor4").childNodes[1].style = `transform: translate(100%) scale(1.23);`
     }
@@ -1209,40 +1271,90 @@ function condigurartiempodeljuego() {
 
 
 
-function interruptortimesetting(id){
+
+function interruptortimesetting(id) {
     console.log(id)
 
 
     var numerodelalistametodosdecalificacion = id.split('circuloprincipaldelinterruptor')
     var textoconvertirenentero = parseInt(numerodelalistametodosdecalificacion[1])
     if (!jsonData.ajustegeneraldeltiempo[textoconvertirenentero - 1]) {
-        
-       
+
+
         jsonData.ajustegeneraldeltiempo[textoconvertirenentero - 1] = true
         document.getElementById(id).style = 'background: #00D43A;'
         document.getElementById(id).childNodes[1].style = '   animation: interrubtoractivar 1s forwards;'
         for (let contadorsttingtiempo = 0; contadorsttingtiempo < jsonData.ajustegeneraldeltiempo.length; contadorsttingtiempo++) {
-            var contadordentrodeestefor=contadorsttingtiempo+1
-            if(textoconvertirenentero!=contadorsttingtiempo+1){
+            var contadordentrodeestefor = contadorsttingtiempo + 1
+            if (textoconvertirenentero != contadorsttingtiempo + 1) {
 
-                if(jsonData.ajustegeneraldeltiempo[contadorsttingtiempo]){
-                    
-                    jsonData.ajustegeneraldeltiempo[contadorsttingtiempo]=false
+                if (jsonData.ajustegeneraldeltiempo[contadorsttingtiempo]) {
+                    if(jsonData.ajustegeneraldeltiempo[1]){
+
+                        document.getElementById("tiempo1setting1").innerHTML=`
+                        <div class="scoretime sore1" id="timersetting" title="Tiempo">
+                        <input type="text" maxLength="2"  autocomplete="off"  onkeydown="  validaciondelosinputtime(id,event, 'ajsutesminutos ajustessegundos' );subiralalist(['ajsuteshora','ajsutesminutos','ajustessegundos'],jsonData.activotiempocompleto); return (event.key >= 48 && event.key <= 53)" id="ajsuteshora" onfocus="" onblur="" placeholder="Hr" pattern="[0-9]*">
+
+                        <label onclick="" for="">:</label>
+
+                        <input type="text" maxLength="2"  autocomplete="off" onkeydown="  validaciondelosinputtime(id,event, 'ajsuteshora ajustessegundos' );subiralalist(['ajsuteshora','ajsutesminutos','ajustessegundos'],jsonData.activotiempocompleto); return (event.key >= 48 && event.key <= 53)" id="ajsutesminutos" onfocus="" onblur="" placeholder="min" pattern="[0-9]*">
+                        <label onclick="" for="">:</label>
+                        <input type="text" class="segundos" autocomplete="off" onkeydown=" validaciondelosinputtime(id,event,'ajsuteshora ajsutesminutos');subiralalist(['ajsuteshora','ajsutesminutos','ajustessegundos'],jsonData.activotiempocompleto); return (event.key >= 46 && event.key <= 57)" id="ajustessegundos" onfocus="" onblur="" maxLength="2" placeholder="ss" pattern="[0-9]*">
+                        <div class="relog" onclick="">
+        
+                            <div id="contenedordelrelogensetting" class="contenedordelrelog" onclick="mostrarcuadroconselectsetting()">
+                                <ion-icon name="timer-outline"></ion-icon>
+        
+                            </div>
+                            </div>
+                        </div>`
+                        var hrminss= jsonData.activotiempocompleto.time.split(":")
+
+        document.getElementById("ajsuteshora").value= hrminss[0]
+        document.getElementById("ajsutesminutos").value=hrminss[1]
+        document.getElementById("ajustessegundos").value=hrminss[2]
+                        document.getElementById("tiempo1setting1").style='animation: nameanimationtiempo 1s forwards'
+
+
+
+                        document.getElementById("ajsuteshora").focus()
+
+                    }
+
+                    jsonData.ajustegeneraldeltiempo[contadorsttingtiempo] = false
                     console.log("se hace")
-                    document.getElementById("circuloprincipaldelinterruptor"+contadordentrodeestefor).style='background: #0303036f;'
-                    document.getElementById("circuloprincipaldelinterruptor"+contadordentrodeestefor).childNodes[1].style='animation: interrubtoractivarreversa 1s forwards;'
+                    document.getElementById("circuloprincipaldelinterruptor" + contadordentrodeestefor).style = 'background: #0303036f;'
+                    document.getElementById("circuloprincipaldelinterruptor" + contadordentrodeestefor).childNodes[1].style = 'animation: interrubtoractivarreversa 1s forwards;'
+                    
+        if(!jsonData.ajustegeneraldeltiempo[1]){
+            document.getElementById("tiempo1setting1").style='animation: nameanimationtiemporever 1s forwards'
+
+        }
                 }
             }
         }
-       
+
+
+
+
     } else {
+
+        
+
         jsonData.ajustegeneraldeltiempo[textoconvertirenentero - 1] = false
         document.getElementById(id).style = 'background: #0303036f;'
 
         document.getElementById(id).childNodes[1].style = 'animation: interrubtoractivarreversa 1s forwards      ;'
 
+        if(!jsonData.ajustegeneraldeltiempo[1]){
+            document.getElementById("tiempo1setting1").style='animation: nameanimationtiemporever 1s forwards'
 
+        }
         if (!jsonData.ajustegeneraldeltiempo[0] && !jsonData.ajustegeneraldeltiempo[1] && !jsonData.ajustegeneraldeltiempo[2] && !jsonData.ajustegeneraldeltiempo[3]) {
+            if(!jsonData.ajustegeneraldeltiempo[1]){
+                document.getElementById("tiempo1setting1").style='animation: nameanimationtiemporever 1s forwards'
+    
+            }
             console.log("ninguna activa")
             jsonData.ajustegeneraldeltiempo[0] = true
             document.getElementById("circuloprincipaldelinterruptor1").style = 'background: #00D43A;'
@@ -1251,7 +1363,248 @@ function interruptortimesetting(id){
 
         }
 
+
     }
 
 
 }
+var logicallogvariableactivecuadrorelog=false
+
+function validaciondelosinputtime(id, event, inputtime) {
+    console.log("hola")
+    var codigo = event.which || event.key;
+    var tecla = String.fromCharCode(codigo)
+
+
+
+
+    if (codigo >= 48 && codigo <= 57) {
+        
+        var cortarporspacios= inputtime.split(" ")
+
+        if(cortarporspacios.length==2){
+            console.log("fueigualados")
+            if (document.getElementById(cortarporspacios[0]).value == "") {
+                document.getElementById(cortarporspacios[0]).value = "00"
+            }
+            if (document.getElementById(cortarporspacios[1]).value == "") {
+                document.getElementById(cortarporspacios[1]).value = "00"
+            }
+
+
+        }else{
+            console.log("fue igual a dos")
+            if (document.getElementById(inputtime).value == "") {
+                document.getElementById(inputtime).value = "00"
+            }
+        }
+
+
+        
+
+        var acomularvaluemastecla = document.getElementById(id).value + "" + tecla
+
+        console.log(acomularvaluemastecla)
+        if (acomularvaluemastecla.length == 3) {
+            console.log("hacerlooo")
+
+            if (document.getElementById(id).value.length == 2) {
+
+
+
+                if (document.getElementById(id).value.includes("9") || document.getElementById(id).value.includes("8") || document.getElementById(id).value.includes("7") || document.getElementById(id).value.includes("6")) {
+                    acomularvaluemastecla = 0 + "" + tecla
+
+                    var acomularvaluemastecla = document.getElementById(id).value = acomularvaluemastecla
+
+                } else {
+
+                    var hacersplit = acomularvaluemastecla.split("")
+
+                    document.getElementById(id).value = hacersplit[1] + "" + hacersplit[2]
+                    acomularvaluemastecla = hacersplit[1] + "" + hacersplit[2]
+
+                }
+
+
+
+            }
+
+
+        }
+
+        if (acomularvaluemastecla.length == 1) {
+            document.getElementById(id).value = 0 + "" + acomularvaluemastecla
+            console.log("es igual a 1")
+        }
+
+    }
+
+
+    console.log("Presionada: " + codigo);
+
+
+    if (codigo === 13) {
+        console.log("Tecla ENTER");
+    }
+
+    if (codigo >= 65 && codigo <= 90) {
+        console.log(String.fromCharCode(codigo));
+    }
+
+
+
+
+}
+
+
+function mostrarcuadroconselectsetting(){
+    var logicallogvariableactivecuadrorelog=true
+var guardarelcontenedor= document.createElement("div")
+
+guardarelcontenedor.setAttribute("id","escojertiempo1" )
+guardarelcontenedor.classList.add("padredelec")
+
+document.querySelector("#tiempo1setting1").appendChild(guardarelcontenedor);
+
+    console.log("holaa")
+    document.getElementById("escojertiempo1").innerHTML+=`
+
+    <div class="selecioesdeopciones ">
+
+    <div class="elegirhora" id="elegirahorasetting">
+    <p>hr</p>
+    <select class="selec" onchange="ajsuteshora(id,'ajsuteshora',['selecttimeseting1','selecttimeseting2','selecttimeseting3'],jsonData.activotiempocompleto)" size="6" id="selecttimeseting1">
+    
+    
+    
+    </select>
+</div>
+    <div class="elegirhora" id="elegirahorasetting">
+    <p>min</p>
+    <select class="selec" onchange="ajsuteshora(id,'ajsutesminutos',['selecttimeseting1','selecttimeseting2','selecttimeseting3'],jsonData.activotiempocompleto)" size="6" id="selecttimeseting2">
+    
+    
+    
+    </select>
+    </div>
+    <div class="elegirhora" id="elegirahorasetting">
+    <p>ss</p>
+    <select class="selec" size="6" onchange="ajsuteshora(id,'ajustessegundos',['selecttimeseting1','selecttimeseting2','selecttimeseting3'],jsonData.activotiempocompleto)" id="selecttimeseting3">
+    
+    
+    
+    </select>
+    
+   
+
+
+
+</div>`
+
+
+var listadedondecolocarnumeros = {
+    seleccion3: "selecttimeseting1",
+    hora: "ajsuteshora",
+    seleccion1: "selecttimeseting2",
+    minutos: "ajsutesminutos",
+    seleccion2: "selecttimeseting3",
+    segundos: "ajustessegundos",
+
+
+}
+
+colocarnumerostime(listadedondecolocarnumeros)
+
+document.getElementById("contenedordelrelogensetting").onclick=""
+
+
+
+
+window.addEventListener('click', function tiemposettingsla(b) {
+    try {
+
+        /*2. Si el div con id clickbox contiene a e. target*/
+        agarrarloqueundio = document.getElementById('escojertiempo1')
+        agarrarrelog = document.getElementById('contenedordelrelogensetting')
+        var otrasopciones = document.getElementById("calificacion")
+
+        if (agarrarloqueundio.contains(b.target) || agarrarrelog.contains(b.target)) {
+
+
+            console.log(b.target)
+
+        }
+        else {
+            console.log(agarrarloqueundio)
+            
+            agarrarloqueundio = document.getElementById('contenedordelrelogensetting').onclick=mostrarcuadroconselectsetting
+            agarrarloqueundio = document.getElementById('escojertiempo1').innerHTML = ""
+            window.removeEventListener("click", tiemposettingsla);
+
+        }
+    } catch (e) {
+        window.removeEventListener("click", tiemposettingsla);
+
+    }
+
+
+
+})
+
+
+    
+}
+
+
+
+
+function ajsuteshora(id,dondecolocar,lista,dondeguardar){
+
+var guardardatosdelselec=document.getElementById(id).value
+
+
+document.getElementById(dondecolocar).value=guardardatosdelselec
+
+Timer=""
+
+for(let rl=0;rl<lista.length;rl++){
+  Timer+=  document.getElementById(lista[rl]).value
+
+  if(rl!=lista.length-1){
+    Timer+=":"
+  }
+}
+
+
+dondeguardar.time=Timer
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+    //     <div class="scoretime" id="timer" title="Tiempo">
+
+//     <input type="text" maxLength="2" onchange="" autocomplete="off" onkeydown="  validaciondelosinputtime(id,event ); return (event.key >= 48 && event.key <= 53)" id="ajustesminutos2" onfocus="" onblur="" placeholder="min" pattern="[0-9]*">
+//     <label onclick="" for="">:</label>
+//     <input type="text" class="segundos" onchange="" autocomplete="off" onkeydown="validaciondelosinputtime(id,event); return (event.key >= 46 && event.key <= 57)" id="ajustessegundos2" onfocus="" onblur="" maxLength="2" placeholder="ss" pattern="[0-9]*">
+//     <div class="relog" onclick="">
+
+//         <div id="" class="contenedordelrelog" onclick="">
+//             <ion-icon name="timer-outline"></ion-icon>
+            
+//         </div>
+//     </div>
+// </div>
