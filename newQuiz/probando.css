@@ -1,0 +1,31 @@
+body{
+    height: 100vh;
+    margin: 0;
+    background-color: #f1f1f1;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    }
+    .content-img{
+    width: 400px;
+    height: 200px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    }
+    .content-img > p{
+    padding: 15px;
+    }
+    .response{
+        background: rebeccapurple;
+        width: 100px;
+        height: 100px;
+    }
+    #crear-imagen{
+        background: red;
+        width: 100%;
+        height: 20px;
+    }
+
+    

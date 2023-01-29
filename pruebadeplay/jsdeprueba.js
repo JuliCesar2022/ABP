@@ -3,7 +3,7 @@ jsonData = {
     metododecalificacion: [true, false, false, false],
     namesala: "",
 
-    ajustegeneraldeltiempo: [true, false, false, false],
+    ajustegeneraldeltiempo: [true, false, false,false],
     activotiempocompleto: { time:"00:10:00"},
     activotiempoigual: {time:""},
     preguntas: [
@@ -17,6 +17,12 @@ jsonData = {
     Tema: "violet:#c84ded"
 
 }
+let navegador = navigator.userAgent;
+        if (navigator.userAgent.match(/Android/i) || navigator.userAgent.match(/webOS/i) || navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/iPod/i) || navigator.userAgent.match(/BlackBerry/i) || navigator.userAgent.match(/Windows Phone/i)) {
+           
+         }else {
+            console.log("No estás usando un móvil");
+        }
 
 CurrentCuestion = {
     state: false,
@@ -1207,7 +1213,7 @@ function condigurartiempodeljuego() {
     </div>
     
     </div>`
-    document.getElementById("settingtiempodelasala").style = 'height:200px'
+    document.getElementById("settingtiempodelasala").style = 'height:225px'
 
     if (jsonData.ajustegeneraldeltiempo[0]) {
         document.getElementById("timenotes").innerHTML=`<p><b>Nota: </b> Esta opcion ajustara el tiempo para responder una pregunta segun lo indicado en el formulario. si no encuentra tal formulario.  <a href="#linkcuadro2">click aqui</a></p>`
@@ -1287,37 +1293,42 @@ function interruptortimesetting(id) {
         for (let contadorsttingtiempo = 0; contadorsttingtiempo < jsonData.ajustegeneraldeltiempo.length; contadorsttingtiempo++) {
             var contadordentrodeestefor = contadorsttingtiempo + 1
             if (textoconvertirenentero != contadorsttingtiempo + 1) {
-
+                
                 if (jsonData.ajustegeneraldeltiempo[contadorsttingtiempo]) {
-                    if(jsonData.ajustegeneraldeltiempo[1]){
 
+                    
+                   
+
+                    if(jsonData.ajustegeneraldeltiempo[1]){
+                        
                         document.getElementById("tiempo1setting1").innerHTML=`
                         <div class="scoretime sore1" id="timersetting" title="Tiempo">
                         <input type="text" maxLength="2"  autocomplete="off"  onkeydown="  validaciondelosinputtime(id,event, 'ajsutesminutos ajustessegundos' );subiralalist(['ajsuteshora','ajsutesminutos','ajustessegundos'],jsonData.activotiempocompleto); return (event.key >= 48 && event.key <= 53)" id="ajsuteshora" onfocus="" onblur="" placeholder="Hr" pattern="[0-9]*">
-
+                        
                         <label onclick="" for="">:</label>
-
+                        
                         <input type="text" maxLength="2"  autocomplete="off" onkeydown="  validaciondelosinputtime(id,event, 'ajsuteshora ajustessegundos' );subiralalist(['ajsuteshora','ajsutesminutos','ajustessegundos'],jsonData.activotiempocompleto); return (event.key >= 48 && event.key <= 53)" id="ajsutesminutos" onfocus="" onblur="" placeholder="min" pattern="[0-9]*">
                         <label onclick="" for="">:</label>
                         <input type="text" class="segundos" autocomplete="off" onkeydown=" validaciondelosinputtime(id,event,'ajsuteshora ajsutesminutos');subiralalist(['ajsuteshora','ajsutesminutos','ajustessegundos'],jsonData.activotiempocompleto); return (event.key >= 46 && event.key <= 57)" id="ajustessegundos" onfocus="" onblur="" maxLength="2" placeholder="ss" pattern="[0-9]*">
                         <div class="relog" onclick="">
-        
-                            <div id="contenedordelrelogensetting" class="contenedordelrelog" onclick="mostrarcuadroconselectsetting()">
-                                <ion-icon name="timer-outline"></ion-icon>
-        
-                            </div>
-                            </div>
+                        
+                        <div id="contenedordelrelogensetting" class="contenedordelrelog" onclick="mostrarcuadroconselectsetting()">
+                        <ion-icon name="timer-outline"></ion-icon>
+                        
+                        </div>
+                        </div>
                         </div>`
                         var hrminss= jsonData.activotiempocompleto.time.split(":")
-
-        document.getElementById("ajsuteshora").value= hrminss[0]
-        document.getElementById("ajsutesminutos").value=hrminss[1]
-        document.getElementById("ajustessegundos").value=hrminss[2]
+                        
+                        document.getElementById("ajsuteshora").value= hrminss[0]
+                        document.getElementById("ajsutesminutos").value=hrminss[1]
+                        document.getElementById("ajustessegundos").value=hrminss[2]
                         document.getElementById("tiempo1setting1").style='animation: nameanimationtiempo 1s forwards'
-
-
-
+                        
+                        
+                        
                         document.getElementById("ajsuteshora").focus()
+                        document.getElementById("timenotes").innerHTML=`<p><b>Nota: </b> Esta opcion fijara el tiempo para terminar todo el Quiz</p>`
 
                     }
 
@@ -1325,10 +1336,22 @@ function interruptortimesetting(id) {
                     console.log("se hace")
                     document.getElementById("circuloprincipaldelinterruptor" + contadordentrodeestefor).style = 'background: #0303036f;'
                     document.getElementById("circuloprincipaldelinterruptor" + contadordentrodeestefor).childNodes[1].style = 'animation: interrubtoractivarreversa 1s forwards;'
+
+
+
+
                     
         if(!jsonData.ajustegeneraldeltiempo[1]){
             document.getElementById("tiempo1setting1").style='animation: nameanimationtiemporever 1s forwards'
 
+
+        }
+
+        if (jsonData.ajustegeneraldeltiempo[0]) {
+            document.getElementById("timenotes").innerHTML=`<p><b>Nota: </b> Esta opcion ajustara el tiempo para responder una pregunta segun lo indicado en el formulario. si no encuentra tal formulario.  <a href="#linkcuadro2">click aqui</a></p>`
+        }
+        if (jsonData.ajustegeneraldeltiempo[3]) {
+            document.getElementById("timenotes").innerHTML=`<p><b>Nota: </b>esta opcion desactivara el tiempo para terminar el Quiz </p>`
         }
                 }
             }
@@ -1355,10 +1378,14 @@ function interruptortimesetting(id) {
                 document.getElementById("tiempo1setting1").style='animation: nameanimationtiemporever 1s forwards'
     
             }
+            
+            
+            
             console.log("ninguna activa")
             jsonData.ajustegeneraldeltiempo[0] = true
             document.getElementById("circuloprincipaldelinterruptor1").style = 'background: #00D43A;'
             document.getElementById("circuloprincipaldelinterruptor1").childNodes[1].style = 'animation: interrubtoractivar 1s forwards;'
+            document.getElementById("timenotes").innerHTML=`<p><b>Nota: </b> Esta opcion ajustara el tiempo para responder una pregunta segun lo indicado en el formulario. si no encuentra tal formulario.  <a href="#linkcuadro2">click aqui</a></p>`
 
 
         }

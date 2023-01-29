@@ -1,141 +1,141 @@
 
-    formato = null
-    Validar=true
-    console.log("funciona")
-    var requestOptions = {
-        method: 'GET',
-        redirect: 'follow'
-      };
-      
-      fetch("https://preguntame.onrender.com/GetSalaById?id="+getParameterByName("id"), requestOptions)
-        .then(response => response.text())
-        .then(result => { 
-            formato=JSON.parse(result)
-            formato=formato.data
-            if(formato==null){
-                location.href ="./..";
+        formato = null
+        Validar=true
+        console.log("funciona")
+        var requestOptions = {
+            method: 'GET',
+            redirect: 'follow'
+        };
+        
+        fetch("https://preguntame.onrender.com/GetSalaById?id="+getParameterByName("id"), requestOptions)
+            .then(response => response.text())
+            .then(result => { 
+                formato=JSON.parse(result)
+                formato=formato.data
+                if(formato==null){
+                    location.href ="./..";
+                }
+            })
+
+            
+
+        Swal.fire({
+            allowOutsideClick: false,
+
+            title: "Elige un Apodo",
+            
+        input: 'text',
+        
+        confirmButtonText: 'Iniciar',
+            showClass: {
+            popup: 'animate__animated animate__fadeInDown'
+            
+            },
+            hideClass: {
+            popup: 'animate__animated animate__fadeOutUp'
             }
         })
-
         
-
-    Swal.fire({
-        allowOutsideClick: false,
-
-        title: "Elige un Apodo",
-        
-    input: 'text',
-    
-    confirmButtonText: 'Iniciar',
-        showClass: {
-          popup: 'animate__animated animate__fadeInDown'
-         
-        },
-        hideClass: {
-          popup: 'animate__animated animate__fadeOutUp'
-        }
-      })
-      
-      .then((result) => {
-        
-        /* Read more about isConfirmed, isDenied below */
-        
-        if (result.isConfirmed) {
-           NombreJugador=result.value
-          if(result.value.length>3){
-            Validar=true
-            console.log("funciona")
-            var requestOptions = {
-                method: 'GET',
-                redirect: 'follow'
-              };
-              
-              fetch("https://preguntame.onrender.com/GetSalaById?id="+getParameterByName("id"), requestOptions)
-                .then(response => response.text())
-                .then(result => { 
-                    formato=JSON.parse(result)
-                    formato=formato.data
-                   
-                     
-                    console.log(formato)
+        .then((result) => {
             
-                    preguntas = formato["preguntas"]
-            correct= 0;
-            incorrec=0;
-            puntofinal=0;
-            time = 25
-            currentQuestion=0;
-            currentTime = time
+            /* Read more about isConfirmed, isDenied below */
             
-            
-            
-              
-            
-            
-            
-            
-            
-            
+            if (result.isConfirmed) {
+            NombreJugador=result.value
+            if(result.value.length>3){
+                Validar=true
+                console.log("funciona")
+                var requestOptions = {
+                    method: 'GET',
+                    redirect: 'follow'
+                };
                 
-                for (let index = 3; index >= -1; index--) {
+                fetch("https://preguntame.onrender.com/GetSalaById?id="+getParameterByName("id"), requestOptions)
+                    .then(response => response.text())
+                    .then(result => { 
+                        formato=JSON.parse(result)
+                        formato=formato.data
+                    
+                        
+                        console.log(formato)
                 
-                    setTimeout (
-                        ()=>{
-            
-                            if(index==0) {
-                                document.getElementById("numero").innerHTML= `GO!`;
-                            }else if(index==-1){
-                                document.getElementById("mama").remove()
-                                empezar();
-                            }else{
-                                document.getElementById("numero").innerHTML= `${index}`;
-                            }
-            
-                         
-                        },5000 - ( index * 1000) 
-                    )
+                        preguntas = formato["preguntas"]
+                correct= 0;
+                incorrec=0;
+                puntofinal=0;
+                time = 25
+                currentQuestion=0;
+                currentTime = time
+                
+                
+                
+                
+                
+                
+                
+                
+                
                 
                     
-                   
-                }
-            
-            
-            
-            
-            
-            
-                })
-                .catch(error => console.log('error', error));
-            
-          }else{
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Something went wrong!',
-                footer: '<a href="">Why do I have this issue?</a>'
-              }).then((siono) => {
-        
-                /* Read more about isConfirmed, isDenied below */
+                    for (let index = 3; index >= -1; index--) {
+                    
+                        setTimeout (
+                            ()=>{
                 
-                if (siono.isConfirmed) {
+                                if(index==0) {
+                                    document.getElementById("numero").innerHTML= `GO!`;
+                                }else if(index==-1){
+                                    document.getElementById("mama").remove()
+                                    empezar();
+                                }else{
+                                    document.getElementById("numero").innerHTML= `${index}`;
+                                }
+                
+                            
+                            },5000 - ( index * 1000) 
+                        )
+                    
+                        
+                    
+                    }
+                
+                
+                
+                
+                
+                
+                    })
+                    .catch(error => console.log('error', error));
+                
+            }else{
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Something went wrong!',
+                    footer: '<a href="">Why do I have this issue?</a>'
+                }).then((siono) => {
+            
+                    /* Read more about isConfirmed, isDenied below */
+                    
+                    if (siono.isConfirmed) {
 
 
-              location.reload()
-          }
-              })
+                location.reload()
             }
-        } else if (result.isDenied) {
-          Swal.fire('Changes are not saved', '', 'info')
-        }
-      })
-    
+                })
+                }
+            } else if (result.isDenied) {
+            Swal.fire('Changes are not saved', '', 'info')
+            }
+        })
+        
 
 
 
 
-    function esperar1s(){
-        return new Promise(resolve=>{setTimeout(()=>{resolve("resolved")},1000)})
-   } 
+        function esperar1s(){
+            return new Promise(resolve=>{setTimeout(()=>{resolve("resolved")},1000)})
+    } 
 
 
    function select1(a){
